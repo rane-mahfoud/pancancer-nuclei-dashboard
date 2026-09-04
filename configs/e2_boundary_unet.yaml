@@ -1,0 +1,56 @@
+experiment:
+  id: e2_boundary_unet
+  seed: 20260904
+
+data:
+  root: ${oc.env:PANNUKE_ROOT}
+  train_fold: fold1
+  validation_fold: fold2
+  test_fold: fold3
+  image_size: 256
+  num_workers: 4
+  class_order:
+    - background
+    - neoplastic
+    - inflammatory
+    - connective
+    - dead
+    - non_neoplastic_epithelial
+  boundary_width_px: 1
+
+model:
+  architecture: unet
+  encoder: resnet34
+  encoder_weights: imagenet
+  semantic_classes: 6
+  boundary_output: true
+
+loss:
+  semantic_cross_entropy_weight: 1.0
+  semantic_dice_weight: 1.0
+  boundary_bce_weight: 1.0
+  boundary_dice_weight: 1.0
+  class_weight_method: smoothed_inverse_frequency
+  class_weight_clip_max: 10.0
+
+training:
+  epochs: 50
+  batch_size: 8
+  precision: "16-mixed"
+  optimizer: adamw
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  scheduler: cosine
+  early_stopping_patience: 10
+  deterministic: true
+  selection_metric: validation_mpq
+
+postprocess:
+  method: marker_controlled_watershed
+  foreground_threshold_grid: [0.4, 0.5, 0.6]
+  boundary_threshold_grid: [0.3, 0.5, 0.7]
+  minimum_seed_area_px_grid: [3, 5]
+  minimum_instance_area_px_grid: [5, 10, 20]
+  watershed_compactness: 0.0
+  selection_metric: validation_bpq
+  tie_break_metric: validation_mpq

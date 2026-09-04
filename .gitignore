@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Environments and secrets
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+
+# Data: never commit PanNuke arrays or archives
+data/raw/**
+data/interim/**
+data/processed/**
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+data/manifest.local.json
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.zip
+*.tar
+*.tar.gz
+
+# Models and run artifacts
+models/checkpoints/**
+!models/checkpoints/.gitkeep
+runs/
+wandb/
+lightning_logs/
+*.ckpt
+*.pth
+*.pt
+
+# Generated predictions; commit summaries/figures deliberately
+reports/predictions/**
+reports/tmp/**
+
+# Notebook noise
+.ipynb_checkpoints/

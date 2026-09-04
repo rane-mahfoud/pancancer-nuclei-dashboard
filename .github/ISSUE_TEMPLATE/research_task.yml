@@ -1,0 +1,44 @@
+name: Research task
+description: Track one auditable unit of data, modeling, evaluation, or documentation work.
+title: "[P3-XX] "
+labels: []
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question or deliverable
+      description: State the measurable outcome, not only the activity.
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Inputs and dependencies
+      description: Name data folds, configurations, earlier issues, and external sources.
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      value: |
+        - [ ]
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      value: |
+        - [ ] Evidence is saved at:
+        - [ ] Tests added or reason documented:
+        - [ ] README/protocol impact reviewed:
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Leakage, licensing, and interpretation risks
+      description: State why this task cannot invalidate the frozen protocol or overstate the evidence.
+    validations:
+      required: true

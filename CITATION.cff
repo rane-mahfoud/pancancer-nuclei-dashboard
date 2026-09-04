@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the repository release and the original PanNuke publications."
+title: "PanCancer Nuclei Profiling"
+type: software
+authors:
+  - family-names: Mahfoud
+    given-names: Rane
+version: 0.0.1
+license: MIT
+preferred-citation:
+  type: software
+  authors:
+    - family-names: Mahfoud
+      given-names: Rane
+  title: "PanCancer Nuclei Profiling"
+  version: 0.0.1
+  year: 2026
