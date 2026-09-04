@@ -16,17 +16,30 @@ CLASS_ORDER = [
 ]
 
 CLASS_COLORS = [
-    "#e6194b",
-    "#3cb44b",
-    "#0082c8",
-    "#f58230",
-    "#911eb4",
+    "#d98ba6",
+    "#a8c7a5",
+    "#8fb8d8",
+    "#e8b38e",
+    "#b7a0d8",
 ]
+
 
 audit = json.loads(INPUT_PATH.read_text(encoding="utf-8"))
 FIGURE_DIR.mkdir(parents=True, exist_ok=True)
 
-sns.set_theme(style="whitegrid")
+sns.set_theme(
+    style="whitegrid",
+    rc={
+        "figure.facecolor": "#fff7fb",
+        "axes.facecolor": "#fff7fb",
+        "axes.edgecolor": "#e8d7e0",
+        "grid.color": "#e8d7e0",
+        "text.color": "#4c3444",
+        "axes.labelcolor": "#4c3444",
+        "xtick.color": "#4c3444",
+        "ytick.color": "#4c3444",
+    },
+)
 
 class_counts = [audit["class_counts"][name] for name in CLASS_ORDER]
 total_nuclei = audit["total_nuclei"]
@@ -67,7 +80,7 @@ tissue_names = [item[0] for item in tissue_items]
 tissue_counts = [item[1] for item in tissue_items]
 
 figure, axis = plt.subplots(figsize=(10, 9))
-bars = axis.barh(tissue_names, tissue_counts, color="#4472c4")
+bars = axis.barh(tissue_names, tissue_counts, color="#d49ab5")
 
 for bar, count in zip(bars, tissue_counts, strict=True):
     axis.text(

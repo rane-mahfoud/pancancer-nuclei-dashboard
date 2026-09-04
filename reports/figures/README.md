@@ -30,3 +30,16 @@ They were generated from all 7,901 samples using the public mirror revision
 - Public mirror: [RationAI/PanNuke](https://huggingface.co/datasets/RationAI/PanNuke)
 - Dataset license: CC BY-NC-SA 4.0
 - Contents: aggregate annotation counts; no model predictions
+
+## `pannuke_annotation_anomalies.png`
+
+This figure shows selected annotation-geometry cases discovered during the
+complete PanNuke audit.
+
+- Top row: examples of instance masks containing two disconnected components
+- Bottom row: examples of pixels shared by more than one instance mask
+- Overlap markers were enlarged to 3×3 pixels only for visual clarity
+- Source: PanNuke Fold 1
+- Mirror revision: `1f498f7bd6a85ef5f204c592b41ac881eab61005`
+- Dataset license: CC BY-NC-SA 4.0
+- Contents: ground-truth annotation inspection; no model predictions
