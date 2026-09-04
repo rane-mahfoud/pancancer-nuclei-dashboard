@@ -1,0 +1,136 @@
+{
+  "dataset": "RationAI/PanNuke",
+  "revision": "1f498f7bd6a85ef5f204c592b41ac881eab61005",
+  "total_samples": 7901,
+  "total_nuclei": 189744,
+  "empty_samples": 343,
+  "class_counts": {
+    "neoplastic": 77403,
+    "inflammatory": 32276,
+    "connective": 50585,
+    "dead": 2908,
+    "epithelial": 26572
+  },
+  "tissue_counts": {
+    "Adrenal Gland": 437,
+    "Bile Duct": 420,
+    "Bladder": 146,
+    "Breast": 2351,
+    "Cervix": 293,
+    "Colon": 1440,
+    "Esophagus": 424,
+    "Head & Neck": 384,
+    "Kidney": 134,
+    "Liver": 224,
+    "Lung": 184,
+    "Ovarian": 146,
+    "Pancreatic": 195,
+    "Prostate": 182,
+    "Skin": 187,
+    "Stomach": 146,
+    "Testis": 196,
+    "Thyroid": 226,
+    "Uterus": 186
+  },
+  "splits": {
+    "fold1": {
+      "samples": 2656,
+      "nuclei": 63218,
+      "empty_samples": 116,
+      "class_counts": {
+        "neoplastic": 26201,
+        "inflammatory": 10820,
+        "connective": 16388,
+        "dead": 967,
+        "epithelial": 8842
+      },
+      "tissue_counts": {
+        "Adrenal Gland": 134,
+        "Bile Duct": 159,
+        "Bladder": 21,
+        "Breast": 827,
+        "Cervix": 155,
+        "Colon": 478,
+        "Esophagus": 155,
+        "Head & Neck": 70,
+        "Kidney": 37,
+        "Liver": 65,
+        "Lung": 80,
+        "Ovarian": 54,
+        "Pancreatic": 78,
+        "Prostate": 77,
+        "Skin": 59,
+        "Stomach": 50,
+        "Testis": 60,
+        "Thyroid": 80,
+        "Uterus": 17
+      }
+    },
+    "fold2": {
+      "samples": 2523,
+      "nuclei": 59872,
+      "empty_samples": 113,
+      "class_counts": {
+        "neoplastic": 22731,
+        "inflammatory": 10631,
+        "connective": 16756,
+        "dead": 884,
+        "epithelial": 8870
+      },
+      "tissue_counts": {
+        "Adrenal Gland": 148,
+        "Bile Duct": 103,
+        "Bladder": 61,
+        "Breast": 749,
+        "Cervix": 52,
+        "Colon": 468,
+        "Esophagus": 128,
+        "Head & Neck": 169,
+        "Kidney": 56,
+        "Liver": 66,
+        "Lung": 53,
+        "Ovarian": 40,
+        "Pancreatic": 89,
+        "Prostate": 37,
+        "Skin": 87,
+        "Stomach": 48,
+        "Testis": 79,
+        "Thyroid": 84,
+        "Uterus": 6
+      }
+    },
+    "fold3": {
+      "samples": 2722,
+      "nuclei": 66654,
+      "empty_samples": 114,
+      "class_counts": {
+        "neoplastic": 28471,
+        "inflammatory": 10825,
+        "connective": 17441,
+        "dead": 1057,
+        "epithelial": 8860
+      },
+      "tissue_counts": {
+        "Adrenal Gland": 155,
+        "Bile Duct": 158,
+        "Bladder": 64,
+        "Breast": 775,
+        "Cervix": 86,
+        "Colon": 494,
+        "Esophagus": 141,
+        "Head & Neck": 145,
+        "Kidney": 41,
+        "Liver": 93,
+        "Lung": 51,
+        "Ovarian": 52,
+        "Pancreatic": 28,
+        "Prostate": 68,
+        "Skin": 41,
+        "Stomach": 48,
+        "Testis": 57,
+        "Thyroid": 62,
+        "Uterus": 163
+      }
+    }
+  }
+}
