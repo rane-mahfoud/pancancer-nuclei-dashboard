@@ -43,3 +43,17 @@ complete PanNuke audit.
 - Mirror revision: `1f498f7bd6a85ef5f204c592b41ac881eab61005`
 - Dataset license: CC BY-NC-SA 4.0
 - Contents: ground-truth annotation inspection; no model predictions
+
+## `tiny_batch_overfit.png`
+
+This figure is a pipeline diagnostic showing whether the compact U-Net can
+memorize two PanNuke Fold 1 training images.
+
+- Split: Fold 1
+- Sample indices: 0 and 1
+- Training steps: 150
+- Initial loss: 1.4332
+- Final loss: 0.3991
+- Loss reduction: 72.2%
+- Purpose: pipeline verification only; not a model-performance result
+- Dataset license: CC BY-NC-SA 4.0
