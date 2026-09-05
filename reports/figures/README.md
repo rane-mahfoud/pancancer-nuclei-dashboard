@@ -57,3 +57,30 @@ memorize two PanNuke Fold 1 training images.
 - Loss reduction: 72.2%
 - Purpose: pipeline verification only; not a model-performance result
 - Dataset license: CC BY-NC-SA 4.0
+
+## `unet_smoke_training_curve.png`
+
+This figure records a short end-to-end semantic U-Net pipeline check.
+
+- Training split: PanNuke Fold 1
+- Validation split: PanNuke Fold 2
+- Training samples: 32
+- Validation samples: 16
+- Epochs: 2
+- Batch size: 2
+- Best validation macro foreground Dice: 0.1659
+- Fold 3 used: no
+- Purpose: pipeline verification only; not a scientific performance result
+
+## `unet_smoke_predictions.png`
+
+This figure compares original PanNuke Fold 2 images, semantic ground truth,
+and predictions from the smoke-test U-Net.
+
+- Training data: 32 Fold 1 images
+- Validation data: first Fold 2 samples
+- Training epochs: 2
+- Purpose: visual pipeline inspection only
+- Interpretation: predictions remain noisy and are not scientific results
+- Fold 3 used: no
+- Dataset license: CC BY-NC-SA 4.0
