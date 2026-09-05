@@ -1,0 +1,30 @@
+{
+  "dataset": "RationAI/PanNuke",
+  "revision": "1f498f7bd6a85ef5f204c592b41ac881eab61005",
+  "split": "fold1",
+  "number_of_samples": 2656,
+  "number_of_instances": 63218,
+  "boundary_width": 2,
+  "ignored_overlap_pixels": 1216,
+  "pixel_counts": {
+    "background": 144404042,
+    "interior": 18558272,
+    "boundary": 11100086
+  },
+  "pixel_frequencies": {
+    "background": 0.8296107717692046,
+    "interior": 0.10661850003217237,
+    "boundary": 0.06377072819862302
+  },
+  "samples_containing_class": {
+    "background": 2656,
+    "interior": 2538,
+    "boundary": 2540
+  },
+  "class_weights": {
+    "background": 0.21734673499287224,
+    "interior": 1.1211382943355535,
+    "boundary": 1.6615149706715742
+  },
+  "weighting_method": "Inverse log frequency with offset 1.02, normalized to mean 1."
+}
