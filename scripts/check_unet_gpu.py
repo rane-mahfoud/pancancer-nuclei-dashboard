@@ -2,10 +2,10 @@
 
 import torch
 from datasets import load_dataset
-from torch.nn import functional as F
 
 from pancancer_nuclei.data.pannuke import IGNORE_LABEL, PanNukeDataset
 from pancancer_nuclei.data.transforms import create_training_transforms
+from pancancer_nuclei.models.losses import CombinedSegmentationLoss
 from pancancer_nuclei.models.unet import UNet
 
 DATASET_NAME = "RationAI/PanNuke"
@@ -46,11 +46,12 @@ def main() -> None:
     torch.cuda.reset_peak_memory_stats(device)
 
     predictions = model(image)
-    loss = F.cross_entropy(
-        predictions,
-        target,
-        ignore_index=IGNORE_LABEL,
+
+    criterion = CombinedSegmentationLoss(
+        ignore_label=IGNORE_LABEL,
     )
+    loss = criterion(predictions, target)
+
     loss.backward()
     torch.cuda.synchronize()
 
