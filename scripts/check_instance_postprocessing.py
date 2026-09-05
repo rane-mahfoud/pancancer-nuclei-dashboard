@@ -12,6 +12,7 @@ from matplotlib.patches import Patch
 
 from pancancer_nuclei.data.pannuke import PanNukeDataset
 from pancancer_nuclei.data.transforms import create_validation_transforms
+from pancancer_nuclei.evaluation.panoptic import panoptic_quality
 from pancancer_nuclei.models.unet import UNet
 from pancancer_nuclei.postprocessing.connected_components import (
     semantic_to_instances,
@@ -57,7 +58,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--minimum-area",
         type=int,
-        default=10,
+        default=100,
     )
     return parser.parse_args()
 
@@ -174,6 +175,21 @@ def main() -> None:
     )
     ground_truth_masks = convert_to_numpy(sample["instance_masks"]).astype(bool)
     ground_truth_categories = convert_to_numpy(sample["categories"]).astype(np.int64)
+    ground_truth_map = np.zeros(
+        ground_truth_masks.shape[1:],
+        dtype=np.int32,
+    )
+
+    for instance_id, instance_mask in enumerate(
+        ground_truth_masks,
+        start=1,
+    ):
+        ground_truth_map[instance_mask] = instance_id
+
+    binary_pq = panoptic_quality(
+        true_map=ground_truth_map,
+        predicted_map=prediction.instance_map,
+    )
 
     figure, axes = plt.subplots(
         1,
@@ -253,6 +269,22 @@ def main() -> None:
         "Predicted classes:",
         count_categories(prediction.categories),
     )
+    print("------------------------")
+    print(
+        "Detection quality:",
+        f"{binary_pq.detection_quality:.4f}",
+    )
+    print(
+        "Segmentation quality:",
+        f"{binary_pq.segmentation_quality:.4f}",
+    )
+    print(
+        "Binary panoptic quality:",
+        f"{binary_pq.panoptic_quality:.4f}",
+    )
+    print("Matched nuclei:", binary_pq.true_positives)
+    print("Extra predicted nuclei:", binary_pq.false_positives)
+    print("Missed nuclei:", binary_pq.false_negatives)
     print("Saved:", OUTPUT_PATH)
 
 

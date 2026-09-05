@@ -7,6 +7,7 @@ from scipy import ndimage
 
 NUMBER_OF_SEMANTIC_CLASSES = 6
 IGNORE_LABEL = 255
+DEFAULT_MINIMUM_AREA = 100
 
 
 @dataclass(frozen=True)
@@ -25,7 +26,7 @@ class InstanceSegmentation:
 
 def semantic_to_instances(
     semantic_mask: np.ndarray,
-    minimum_area: int = 10,
+    minimum_area: int = DEFAULT_MINIMUM_AREA,
     connectivity: int = 2,
 ) -> InstanceSegmentation:
     """Split semantic regions into connected nucleus instances.
