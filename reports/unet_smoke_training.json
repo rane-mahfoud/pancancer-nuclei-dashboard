@@ -1,0 +1,49 @@
+{
+  "purpose": "pipeline smoke test",
+  "dataset": "RationAI/PanNuke",
+  "revision": "1f498f7bd6a85ef5f204c592b41ac881eab61005",
+  "training_split": "fold1",
+  "validation_split": "fold2",
+  "fold3_used": false,
+  "seed": 42,
+  "epochs": 2,
+  "batch_size": 2,
+  "base_channels": 16,
+  "training_samples": 32,
+  "validation_samples": 16,
+  "best_validation_macro_foreground_dice": 0.1659103160149926,
+  "history": [
+    {
+      "epoch": 1,
+      "training_loss": 1.1872742027044296,
+      "validation_loss": 1.0699574202299118,
+      "validation_macro_foreground_dice": 0.1659103160149926,
+      "validation_pixel_accuracy": 0.673487663269043,
+      "validation_dice_per_class": {
+        "background": 0.8083655597398608,
+        "neoplastic": 0.6274487964042824,
+        "inflammatory": 0.0,
+        "connective": 0.03619246765568795,
+        "dead": 0.0,
+        "epithelial": null
+      },
+      "learning_rate": 0.0003
+    },
+    {
+      "epoch": 2,
+      "training_loss": 1.0443033687770367,
+      "validation_loss": 0.996955119073391,
+      "validation_macro_foreground_dice": 0.1622363818109736,
+      "validation_pixel_accuracy": 0.8741626739501953,
+      "validation_dice_per_class": {
+        "background": 0.9392447138157446,
+        "neoplastic": 0.6258647738974781,
+        "inflammatory": 0.0,
+        "connective": 0.023080753346416332,
+        "dead": 0.0,
+        "epithelial": null
+      },
+      "learning_rate": 0.0003
+    }
+  ]
+}
