@@ -1,0 +1,2910 @@
+{
+  "run_name": "boundary_unet_weighted",
+  "purpose": "boundary-aware U-Net training",
+  "dataset": "RationAI/PanNuke",
+  "revision": "1f498f7bd6a85ef5f204c592b41ac881eab61005",
+  "training_split": "fold1",
+  "validation_split": "fold2",
+  "fold3_used": false,
+  "seed": 42,
+  "epochs": 25,
+  "batch_size": 4,
+  "base_channels": 32,
+  "training_samples": 2656,
+  "validation_samples": 2523,
+  "semantic_class_weights": {
+    "background": 0.07623803615570068,
+    "neoplastic": 0.4480939209461212,
+    "inflammatory": 1.2606501579284668,
+    "connective": 0.8457023501396179,
+    "dead": 2.293400287628174,
+    "epithelial": 1.0759152173995972
+  },
+  "spatial_class_weights": {
+    "background": 0.21734672784805298,
+    "interior": 1.121138334274292,
+    "boundary": 1.6615149974822998
+  },
+  "semantic_task_weight": 1.0,
+  "spatial_task_weight": 0.5,
+  "checkpoint_selection": "mean of semantic and spatial macro foreground Dice",
+  "best_selection_score": 0.6124523979392975,
+  "history": [
+    {
+      "epoch": 1,
+      "training_loss": 1.3187161192118404,
+      "training_semantic_loss": 0.9927500547414803,
+      "training_spatial_loss": 0.6519321242280035,
+      "validation_loss": 1.1315271138046357,
+      "validation_semantic_loss": 0.86386332892729,
+      "validation_spatial_loss": 0.535327572858362,
+      "validation_semantic_dice": 0.28813104947855805,
+      "validation_spatial_dice": 0.5482972209128825,
+      "selection_score": 0.41821413519572026,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8036585650254005,
+        "macro_foreground_dice": 0.28813104947855805,
+        "dice_per_class": {
+          "background": 0.9222085062074897,
+          "neoplastic": 0.37517424904928426,
+          "inflammatory": 0.37767739899105307,
+          "connective": 0.3440605868710317,
+          "dead": 0.0,
+          "epithelial": 0.34374301248142103
+        },
+        "iou_per_class": {
+          "background": 0.855646487765868,
+          "neoplastic": 0.23090122053380974,
+          "inflammatory": 0.23280042992446123,
+          "connective": 0.20777365653790106,
+          "dead": 0.0,
+          "epithelial": 0.207542075337246
+        },
+        "confusion_matrix": [
+          [
+            120153530,
+            12396859,
+            1101689,
+            3484083,
+            0,
+            1525070
+          ],
+          [
+            1096988,
+            6609589,
+            1040936,
+            1661079,
+            0,
+            2608868
+          ],
+          [
+            109889,
+            403611,
+            1549532,
+            360649,
+            0,
+            587779
+          ],
+          [
+            413386,
+            1532041,
+            1076387,
+            2555777,
+            0,
+            757934
+          ],
+          [
+            7009,
+            24502,
+            40370,
+            28106,
+            0,
+            3974
+          ],
+          [
+            135763,
+            1250707,
+            385211,
+            431333,
+            0,
+            2013105
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.8477062816175336,
+        "macro_foreground_dice": 0.5482972209128825,
+        "dice_per_class": {
+          "background": 0.9225904366776572,
+          "interior": 0.6579929299848948,
+          "boundary": 0.43860151184087026
+        },
+        "iou_per_class": {
+          "background": 0.8563042951212729,
+          "interior": 0.490305114396669,
+          "boundary": 0.28090299508229716
+        },
+        "confusion_matrix": [
+          [
+            120246749,
+            8427247,
+            9987235
+          ],
+          [
+            795184,
+            13683897,
+            1986823
+          ],
+          [
+            968840,
+            3015791,
+            6233990
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 273.70934620010667
+    },
+    {
+      "epoch": 2,
+      "training_loss": 1.1267069421080222,
+      "training_semantic_loss": 0.8657103645873357,
+      "training_spatial_loss": 0.5219931589013123,
+      "validation_loss": 1.0504721390689549,
+      "validation_semantic_loss": 0.792630874355823,
+      "validation_spatial_loss": 0.5156825261284294,
+      "validation_semantic_dice": 0.3333691504826735,
+      "validation_spatial_dice": 0.5606172049341734,
+      "selection_score": 0.4469931777084235,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8225030523311405,
+        "macro_foreground_dice": 0.3333691504826735,
+        "dice_per_class": {
+          "background": 0.9238607530322807,
+          "neoplastic": 0.47740100232573696,
+          "inflammatory": 0.45069915791484305,
+          "connective": 0.3981527493822026,
+          "dead": 0.0,
+          "epithelial": 0.3405928427905848
+        },
+        "iou_per_class": {
+          "background": 0.8584955484482888,
+          "neoplastic": 0.3135434891622526,
+          "inflammatory": 0.2909048686169051,
+          "connective": 0.24855849971253113,
+          "dead": 0.0,
+          "epithelial": 0.20524971301398479
+        },
+        "confusion_matrix": [
+          [
+            120394237,
+            14590003,
+            694232,
+            2133593,
+            0,
+            849166
+          ],
+          [
+            770004,
+            10239829,
+            675841,
+            619890,
+            0,
+            711896
+          ],
+          [
+            137497,
+            698603,
+            1642263,
+            343665,
+            0,
+            189432
+          ],
+          [
+            511983,
+            2241653,
+            914957,
+            2452133,
+            0,
+            214799
+          ],
+          [
+            9997,
+            54467,
+            24730,
+            13822,
+            0,
+            945
+          ],
+          [
+            147915,
+            2056215,
+            324141,
+            418921,
+            0,
+            1268927
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.8580606689415119,
+        "macro_foreground_dice": 0.5606172049341734,
+        "dice_per_class": {
+          "background": 0.9293175768277966,
+          "interior": 0.6441386738552314,
+          "boundary": 0.4770957360131155
+        },
+        "iou_per_class": {
+          "background": 0.8679675286668357,
+          "interior": 0.4750771051835836,
+          "boundary": 0.31328018923796536
+        },
+        "confusion_matrix": [
+          [
+            121803108,
+            10296149,
+            6561974
+          ],
+          [
+            610643,
+            14342698,
+            1512563
+          ],
+          [
+            1059537,
+            3428200,
+            5730884
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 285.5216200000141
+    },
+    {
+      "epoch": 3,
+      "training_loss": 1.053664238876607,
+      "training_semantic_loss": 0.8079012793051191,
+      "training_spatial_loss": 0.4915259183799646,
+      "validation_loss": 0.9676041892488656,
+      "validation_semantic_loss": 0.732871944321747,
+      "validation_spatial_loss": 0.46946448963423404,
+      "validation_semantic_dice": 0.3797408937582679,
+      "validation_spatial_dice": 0.6029171474204165,
+      "selection_score": 0.4913290205893422,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8566001718241864,
+        "macro_foreground_dice": 0.3797408937582679,
+        "dice_per_class": {
+          "background": 0.942271191935611,
+          "neoplastic": 0.5706146337457438,
+          "inflammatory": 0.47910545013283323,
+          "connective": 0.42525073616288944,
+          "dead": 0.0,
+          "epithelial": 0.4237336487498728
+        },
+        "iou_per_class": {
+          "background": 0.8908438389419858,
+          "neoplastic": 0.3992027952833009,
+          "inflammatory": 0.315015561187117,
+          "connective": 0.27004345766557325,
+          "dead": 0.0,
+          "epithelial": 0.268821096392632
+        },
+        "confusion_matrix": [
+          [
+            125424549,
+            7221114,
+            960126,
+            3687285,
+            0,
+            1368157
+          ],
+          [
+            1077528,
+            9060628,
+            740919,
+            1358710,
+            0,
+            779675
+          ],
+          [
+            149495,
+            363924,
+            1976086,
+            439757,
+            0,
+            82198
+          ],
+          [
+            623552,
+            1032687,
+            1116620,
+            3395982,
+            0,
+            166684
+          ],
+          [
+            12665,
+            39659,
+            23252,
+            27310,
+            0,
+            1075
+          ],
+          [
+            268498,
+            1021961,
+            420602,
+            727100,
+            0,
+            1777958
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.8794733261856446,
+        "macro_foreground_dice": 0.6029171474204165,
+        "dice_per_class": {
+          "background": 0.9435815468470236,
+          "interior": 0.70597274252659,
+          "boundary": 0.49986155231424284
+        },
+        "iou_per_class": {
+          "background": 0.8931891941406542,
+          "interior": 0.5455624975821629,
+          "boundary": 0.3332102800813967
+        },
+        "confusion_matrix": [
+          [
+            125823677,
+            4447456,
+            8390098
+          ],
+          [
+            937304,
+            12325624,
+            3202976
+          ],
+          [
+            1271594,
+            1679146,
+            7267881
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 282.3671587998979
+    },
+    {
+      "epoch": 4,
+      "training_loss": 1.0078034350670964,
+      "training_semantic_loss": 0.7696860047977373,
+      "training_spatial_loss": 0.47623486026942013,
+      "validation_loss": 0.9563367500416919,
+      "validation_semantic_loss": 0.7264999264657048,
+      "validation_spatial_loss": 0.45967364776916464,
+      "validation_semantic_dice": 0.3898374552882645,
+      "validation_spatial_dice": 0.612597047238181,
+      "selection_score": 0.5012172512632227,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8601550559301927,
+        "macro_foreground_dice": 0.3898374552882645,
+        "dice_per_class": {
+          "background": 0.9431717429598452,
+          "neoplastic": 0.5871718575657406,
+          "inflammatory": 0.4953823186759631,
+          "connective": 0.4066144062565098,
+          "dead": 0.0,
+          "epithelial": 0.46001869394310885
+        },
+        "iou_per_class": {
+          "background": 0.8924550764770182,
+          "neoplastic": 0.4156003408553723,
+          "inflammatory": 0.32924132477297186,
+          "connective": 0.25518895605250985,
+          "dead": 0.0,
+          "epithelial": 0.29871706372915835
+        },
+        "confusion_matrix": [
+          [
+            125645665,
+            7006822,
+            836516,
+            3418768,
+            0,
+            1753460
+          ],
+          [
+            1116346,
+            9553841,
+            474966,
+            733428,
+            0,
+            1138879
+          ],
+          [
+            141784,
+            471447,
+            1826084,
+            362272,
+            0,
+            209873
+          ],
+          [
+            529954,
+            1551865,
+            936109,
+            2880072,
+            0,
+            437525
+          ],
+          [
+            10506,
+            45845,
+            22487,
+            23384,
+            0,
+            1739
+          ],
+          [
+            326722,
+            894610,
+            264801,
+            412660,
+            0,
+            2317326
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.883201537994117,
+        "macro_foreground_dice": 0.612597047238181,
+        "dice_per_class": {
+          "background": 0.9435979518507783,
+          "interior": 0.7271962766395993,
+          "boundary": 0.49799781783676256
+        },
+        "iou_per_class": {
+          "background": 0.8932185937200026,
+          "interior": 0.5713341839696128,
+          "boundary": 0.33155598823400395
+        },
+        "confusion_matrix": [
+          [
+            125866243,
+            4918280,
+            7876708
+          ],
+          [
+            941566,
+            13494894,
+            2029444
+          ],
+          [
+            1310350,
+            2235782,
+            6672489
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 284.5881014999468
+    },
+    {
+      "epoch": 5,
+      "training_loss": 0.9722699458340565,
+      "training_semantic_loss": 0.7440020927643202,
+      "training_spatial_loss": 0.4565357047480991,
+      "validation_loss": 0.9028064060396634,
+      "validation_semantic_loss": 0.6877690401789077,
+      "validation_spatial_loss": 0.43007473354133713,
+      "validation_semantic_dice": 0.4099055596961213,
+      "validation_spatial_dice": 0.6418087881986947,
+      "selection_score": 0.525857173947408,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.875052317641585,
+        "macro_foreground_dice": 0.4099055596961213,
+        "dice_per_class": {
+          "background": 0.951138388087435,
+          "neoplastic": 0.6267198237813271,
+          "inflammatory": 0.5067206125325965,
+          "connective": 0.42688042537484405,
+          "dead": 9.614090410906225e-05,
+          "epithelial": 0.4891107958877298
+        },
+        "iou_per_class": {
+          "background": 0.9068292492401024,
+          "neoplastic": 0.4563670506822578,
+          "inflammatory": 0.3393340970118075,
+          "connective": 0.27135917209380694,
+          "dead": 4.807276293397687e-05,
+          "epithelial": 0.32372380089585
+        },
+        "confusion_matrix": [
+          [
+            127813044,
+            5384460,
+            1163496,
+            2289538,
+            31,
+            2010662
+          ],
+          [
+            1184908,
+            9407910,
+            611244,
+            654402,
+            8,
+            1158988
+          ],
+          [
+            131961,
+            260889,
+            2240074,
+            224914,
+            9,
+            153613
+          ],
+          [
+            690881,
+            1296549,
+            1352978,
+            2683063,
+            0,
+            312054
+          ],
+          [
+            20545,
+            23152,
+            31914,
+            27127,
+            5,
+            1218
+          ],
+          [
+            255469,
+            632278,
+            430290,
+            355991,
+            0,
+            2542091
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.8971742340940398,
+        "macro_foreground_dice": 0.6418087881986947,
+        "dice_per_class": {
+          "background": 0.9517903700945523,
+          "interior": 0.747724948672961,
+          "boundary": 0.5358926277244284
+        },
+        "iou_per_class": {
+          "background": 0.9080152890604595,
+          "interior": 0.5970932247516989,
+          "boundary": 0.36602003232285046
+        },
+        "confusion_matrix": [
+          [
+            128193031,
+            3792024,
+            6676176
+          ],
+          [
+            1054600,
+            13133287,
+            2278017
+          ],
+          [
+            1463544,
+            1737443,
+            7017634
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 284.5659103000071
+    },
+    {
+      "epoch": 6,
+      "training_loss": 0.9216023149440088,
+      "training_semantic_loss": 0.7033947085041597,
+      "training_spatial_loss": 0.4364152132387621,
+      "validation_loss": 0.8836389602498962,
+      "validation_semantic_loss": 0.6708760798011407,
+      "validation_spatial_loss": 0.42552576006548515,
+      "validation_semantic_dice": 0.40676673622132836,
+      "validation_spatial_dice": 0.6358648092023313,
+      "selection_score": 0.5213157727118298,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8706766504487723,
+        "macro_foreground_dice": 0.40676673622132836,
+        "dice_per_class": {
+          "background": 0.9467589729192651,
+          "neoplastic": 0.6423746756603681,
+          "inflammatory": 0.5353200345766851,
+          "connective": 0.46334148715399354,
+          "dead": 3.847411653809899e-05,
+          "epithelial": 0.39275900959905724
+        },
+        "iou_per_class": {
+          "background": 0.8989005826552298,
+          "neoplastic": 0.47316049880907185,
+          "inflammatory": 0.3654860086940354,
+          "connective": 0.30152534429777145,
+          "dead": 1.9237428340579432e-05,
+          "epithelial": 0.2443684624426356
+        },
+        "confusion_matrix": [
+          [
+            126175721,
+            6425116,
+            1117351,
+            3977785,
+            3,
+            965255
+          ],
+          [
+            852241,
+            10400425,
+            520284,
+            1027638,
+            0,
+            216872
+          ],
+          [
+            92907,
+            179151,
+            2172140,
+            537977,
+            0,
+            29285
+          ],
+          [
+            555485,
+            1081049,
+            763466,
+            3872629,
+            0,
+            62896
+          ],
+          [
+            15198,
+            20114,
+            17012,
+            51288,
+            2,
+            347
+          ],
+          [
+            189652,
+            1257865,
+            513582,
+            913248,
+            0,
+            1341772
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.8919739070895778,
+        "macro_foreground_dice": 0.6358648092023313,
+        "dice_per_class": {
+          "background": 0.9477337650224622,
+          "interior": 0.7467349130270087,
+          "boundary": 0.524994705377654
+        },
+        "iou_per_class": {
+          "background": 0.9006596748233522,
+          "interior": 0.5958315768857777,
+          "boundary": 0.3559273361876788
+        },
+        "confusion_matrix": [
+          [
+            126531608,
+            5130069,
+            6999554
+          ],
+          [
+            647021,
+            14274321,
+            1544562
+          ],
+          [
+            1179450,
+            2361000,
+            6678171
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 286.2391371000558
+    },
+    {
+      "epoch": 7,
+      "training_loss": 0.899319669478629,
+      "training_semantic_loss": 0.6859168115419796,
+      "training_spatial_loss": 0.42680571493075553,
+      "validation_loss": 0.9080387758511166,
+      "validation_semantic_loss": 0.6960115849999825,
+      "validation_spatial_loss": 0.42405438403057444,
+      "validation_semantic_dice": 0.41532912805306266,
+      "validation_spatial_dice": 0.6414733428540129,
+      "selection_score": 0.5284012354535378,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8729431253137214,
+        "macro_foreground_dice": 0.41532912805306266,
+        "dice_per_class": {
+          "background": 0.9475838707709475,
+          "neoplastic": 0.640537737457022,
+          "inflammatory": 0.4646044474804097,
+          "connective": 0.47555197223424117,
+          "dead": 0.0015357444521231667,
+          "epithelial": 0.4944157386415173
+        },
+        "iou_per_class": {
+          "background": 0.9003889663541171,
+          "neoplastic": 0.4711699288061496,
+          "inflammatory": 0.30259593152916975,
+          "connective": 0.31195026893190536,
+          "dead": 0.0007684623069238454,
+          "epithelial": 0.3283879563109991
+        },
+        "confusion_matrix": [
+          [
+            126489435,
+            5883489,
+            286486,
+            4460577,
+            77,
+            1541167
+          ],
+          [
+            986927,
+            10332749,
+            64497,
+            982766,
+            5,
+            650516
+          ],
+          [
+            109691,
+            594751,
+            1063753,
+            1057167,
+            58,
+            186040
+          ],
+          [
+            447416,
+            1344318,
+            106135,
+            4211119,
+            3,
+            226534
+          ],
+          [
+            12734,
+            28281,
+            3195,
+            57918,
+            80,
+            1753
+          ],
+          [
+            265103,
+            1061685,
+            43651,
+            605375,
+            0,
+            2240305
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.8965173136950669,
+        "macro_foreground_dice": 0.6414733428540129,
+        "dice_per_class": {
+          "background": 0.9505698002365218,
+          "interior": 0.7550050476877266,
+          "boundary": 0.5279416380202991
+        },
+        "iou_per_class": {
+          "background": 0.905796117217479,
+          "interior": 0.606432215878056,
+          "boundary": 0.35864178463026136
+        },
+        "confusion_matrix": [
+          [
+            127575990,
+            4391427,
+            6693814
+          ],
+          [
+            875942,
+            14036813,
+            1553149
+          ],
+          [
+            1306873,
+            2289218,
+            6622530
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 286.33574020001106
+    },
+    {
+      "epoch": 8,
+      "training_loss": 0.8711769382906965,
+      "training_semantic_loss": 0.6615762637860804,
+      "training_spatial_loss": 0.41920134954782856,
+      "validation_loss": 0.8403926524951953,
+      "validation_semantic_loss": 0.6397524452421282,
+      "validation_spatial_loss": 0.4012804151626375,
+      "validation_semantic_dice": 0.4368242964056138,
+      "validation_spatial_dice": 0.6574162919285799,
+      "selection_score": 0.5471202941670968,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.879637612228765,
+        "macro_foreground_dice": 0.4368242964056138,
+        "dice_per_class": {
+          "background": 0.9513078078365409,
+          "neoplastic": 0.668891296327122,
+          "inflammatory": 0.5484109921151833,
+          "connective": 0.4738562476446073,
+          "dead": 0.00028805161885009795,
+          "epithelial": 0.49267489432230654
+        },
+        "iou_per_class": {
+          "background": 0.9071373039156385,
+          "neoplastic": 0.5025068910461449,
+          "inflammatory": 0.37780045807476903,
+          "connective": 0.31049253840817775,
+          "dead": 0.0001440465558468497,
+          "epithelial": 0.3268537706076353
+        },
+        "confusion_matrix": [
+          [
+            127362971,
+            4557437,
+            975626,
+            2979829,
+            157,
+            2785211
+          ],
+          [
+            906494,
+            9559672,
+            537357,
+            636065,
+            12,
+            1377860
+          ],
+          [
+            102477,
+            107591,
+            2122925,
+            228177,
+            0,
+            450290
+          ],
+          [
+            538286,
+            850839,
+            871854,
+            3238358,
+            3,
+            836185
+          ],
+          [
+            16106,
+            9830,
+            34653,
+            39851,
+            15,
+            3506
+          ],
+          [
+            176391,
+            480805,
+            188220,
+            210298,
+            0,
+            3160405
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.9004591808210669,
+        "macro_foreground_dice": 0.6574162919285799,
+        "dice_per_class": {
+          "background": 0.9527187311916654,
+          "interior": 0.7704502482434573,
+          "boundary": 0.5443823356137024
+        },
+        "iou_per_class": {
+          "background": 0.9097066466926611,
+          "interior": 0.6266116902897074,
+          "boundary": 0.37398717323427044
+        },
+        "confusion_matrix": [
+          [
+            127811304,
+            3882379,
+            6967548
+          ],
+          [
+            662534,
+            13958397,
+            1844973
+          ],
+          [
+            1173509,
+            1927709,
+            7117403
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 285.1394609999843
+    },
+    {
+      "epoch": 9,
+      "training_loss": 0.853177076946181,
+      "training_semantic_loss": 0.646301780165319,
+      "training_spatial_loss": 0.41375059217035054,
+      "validation_loss": 0.8113712174910203,
+      "validation_semantic_loss": 0.611863572811217,
+      "validation_spatial_loss": 0.3990152882531306,
+      "validation_semantic_dice": 0.45121814937233484,
+      "validation_spatial_dice": 0.6528314752041809,
+      "selection_score": 0.5520248122882578,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8755839430193781,
+        "macro_foreground_dice": 0.45121814937233484,
+        "dice_per_class": {
+          "background": 0.9478841448945985,
+          "neoplastic": 0.6591474181952591,
+          "inflammatory": 0.583870223973878,
+          "connective": 0.4800607066403352,
+          "dead": 0.0006698051823783826,
+          "epithelial": 0.5323425928698234
+        },
+        "iou_per_class": {
+          "background": 0.900931337832219,
+          "neoplastic": 0.4915882828133647,
+          "inflammatory": 0.4122999416143256,
+          "connective": 0.31584202654516014,
+          "dead": 0.00033501478850994995,
+          "epithelial": 0.36271584245996064
+        },
+        "confusion_matrix": [
+          [
+            126252277,
+            4419410,
+            720840,
+            5112484,
+            355,
+            2155865
+          ],
+          [
+            785756,
+            9026956,
+            465472,
+            1651353,
+            100,
+            1087823
+          ],
+          [
+            101443,
+            103988,
+            2098020,
+            487336,
+            46,
+            220627
+          ],
+          [
+            397463,
+            438650,
+            662432,
+            4480920,
+            11,
+            356049
+          ],
+          [
+            13598,
+            5587,
+            25254,
+            56947,
+            35,
+            2540
+          ],
+          [
+            175802,
+            377743,
+            203119,
+            543574,
+            0,
+            2915881
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.8952383089893157,
+        "macro_foreground_dice": 0.6528314752041809,
+        "dice_per_class": {
+          "background": 0.9495652183555476,
+          "interior": 0.7706933465759616,
+          "boundary": 0.5349696038324003
+        },
+        "iou_per_class": {
+          "background": 0.9039735116815213,
+          "interior": 0.6269333566440218,
+          "boundary": 0.36515938865967373
+        },
+        "confusion_matrix": [
+          [
+            126736600,
+            3793040,
+            8131591
+          ],
+          [
+            584699,
+            13841792,
+            2039413
+          ],
+          [
+            953532,
+            1819626,
+            7445463
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 262.1505669998005
+    },
+    {
+      "epoch": 10,
+      "training_loss": 0.843396427087396,
+      "training_semantic_loss": 0.6392459046903504,
+      "training_spatial_loss": 0.40830104501850634,
+      "validation_loss": 0.8267487048317638,
+      "validation_semantic_loss": 0.6273681889535446,
+      "validation_spatial_loss": 0.39876103169811516,
+      "validation_semantic_dice": 0.4401684154180744,
+      "validation_spatial_dice": 0.6520851722055743,
+      "selection_score": 0.5461267938118244,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8686783167267988,
+        "macro_foreground_dice": 0.4401684154180744,
+        "dice_per_class": {
+          "background": 0.9452031141846874,
+          "neoplastic": 0.6422959917382671,
+          "inflammatory": 0.5724157566123742,
+          "connective": 0.46380357290453106,
+          "dead": 0.008763175653198748,
+          "epithelial": 0.5135635801820009
+        },
+        "iou_per_class": {
+          "background": 0.8960996442970023,
+          "neoplastic": 0.4730751237602944,
+          "inflammatory": 0.4009681104731475,
+          "connective": 0.3019168413127076,
+          "dead": 0.0044008706277684434,
+          "epithelial": 0.3454998635225058
+        },
+        "confusion_matrix": [
+          [
+            125452641,
+            4229162,
+            1055913,
+            5648807,
+            482,
+            2274226
+          ],
+          [
+            734728,
+            8521620,
+            476392,
+            2035473,
+            111,
+            1249136
+          ],
+          [
+            73481,
+            87981,
+            2296026,
+            443104,
+            125,
+            110743
+          ],
+          [
+            373926,
+            365782,
+            798745,
+            4570489,
+            73,
+            226510
+          ],
+          [
+            13639,
+            3911,
+            19470,
+            64959,
+            461,
+            1521
+          ],
+          [
+            141534,
+            308953,
+            364226,
+            610370,
+            0,
+            2791036
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.8935074208980605,
+        "macro_foreground_dice": 0.6520851722055743,
+        "dice_per_class": {
+          "background": 0.9482576012358458,
+          "interior": 0.7730264522559486,
+          "boundary": 0.5311438921551999
+        },
+        "iou_per_class": {
+          "background": 0.9016063271292403,
+          "interior": 0.6300269909463468,
+          "boundary": 0.36160376044902603
+        },
+        "confusion_matrix": [
+          [
+            126361728,
+            3736286,
+            8563217
+          ],
+          [
+            575740,
+            13844702,
+            2045462
+          ],
+          [
+            914805,
+            1772586,
+            7531230
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 259.48291100002825
+    },
+    {
+      "epoch": 11,
+      "training_loss": 0.8232409426246781,
+      "training_semantic_loss": 0.621266834078783,
+      "training_spatial_loss": 0.40394821715911466,
+      "validation_loss": 0.88273631853782,
+      "validation_semantic_loss": 0.676118451890525,
+      "validation_spatial_loss": 0.41323573345820824,
+      "validation_semantic_dice": 0.4684396773926359,
+      "validation_spatial_dice": 0.6703686145487786,
+      "selection_score": 0.5694041459707073,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8962589581071557,
+        "macro_foreground_dice": 0.4684396773926359,
+        "dice_per_class": {
+          "background": 0.9598434716905174,
+          "neoplastic": 0.6849391850528334,
+          "inflammatory": 0.5492264358485476,
+          "connective": 0.5215162619572405,
+          "dead": 0.12327535933587185,
+          "epithelial": 0.4632411447686863
+        },
+        "iou_per_class": {
+          "background": 0.9227875281910751,
+          "neoplastic": 0.5208422129742731,
+          "inflammatory": 0.37857488544036594,
+          "connective": 0.3527372324349216,
+          "dead": 0.06568643937676846,
+          "epithelial": 0.3014403614410662
+        },
+        "confusion_matrix": [
+          [
+            130590405,
+            4277424,
+            327130,
+            2870672,
+            7570,
+            588030
+          ],
+          [
+            1336129,
+            10385738,
+            72463,
+            989377,
+            6143,
+            227610
+          ],
+          [
+            171117,
+            484789,
+            1402559,
+            919081,
+            11966,
+            21948
+          ],
+          [
+            873752,
+            974812,
+            160474,
+            4265039,
+            6725,
+            54723
+          ],
+          [
+            32274,
+            11546,
+            2510,
+            48637,
+            8984,
+            10
+          ],
+          [
+            442803,
+            1174246,
+            130802,
+            927972,
+            406,
+            1539890
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.9126002544631384,
+        "macro_foreground_dice": 0.6703686145487786,
+        "dice_per_class": {
+          "background": 0.9604827537130034,
+          "interior": 0.7767859917912037,
+          "boundary": 0.5639512373063535
+        },
+        "iou_per_class": {
+          "background": 0.9239700035220264,
+          "interior": 0.6350368672843144,
+          "boundary": 0.39271036747285004
+        },
+        "confusion_matrix": [
+          [
+            131125629,
+            2352532,
+            5183070
+          ],
+          [
+            1354625,
+            12821214,
+            2290065
+          ],
+          [
+            1899605,
+            1371280,
+            6947736
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 256.911918199854
+    },
+    {
+      "epoch": 12,
+      "training_loss": 0.812468180006527,
+      "training_semantic_loss": 0.6122021763529404,
+      "training_spatial_loss": 0.4005320080701845,
+      "validation_loss": 0.8489513265074563,
+      "validation_semantic_loss": 0.6505633582297552,
+      "validation_spatial_loss": 0.39677593696154095,
+      "validation_semantic_dice": 0.42065529095405924,
+      "validation_spatial_dice": 0.6643290406570139,
+      "selection_score": 0.5424921658055366,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8805587970458704,
+        "macro_foreground_dice": 0.42065529095405924,
+        "dice_per_class": {
+          "background": 0.9530362035571415,
+          "neoplastic": 0.6865416014961022,
+          "inflammatory": 0.5742723171647687,
+          "connective": 0.4666021091933452,
+          "dead": 0.04278753743686022,
+          "epithelial": 0.3330728894792205
+        },
+        "iou_per_class": {
+          "background": 0.9102857298362719,
+          "neoplastic": 0.5226976372286412,
+          "inflammatory": 0.40279242949309857,
+          "connective": 0.30429291183378754,
+          "dead": 0.021861467906670807,
+          "epithelial": 0.1998125097234529
+        },
+        "confusion_matrix": [
+          [
+            128045892,
+            4273215,
+            657829,
+            5251665,
+            2335,
+            430295
+          ],
+          [
+            994692,
+            9805677,
+            246529,
+            1903928,
+            1286,
+            65348
+          ],
+          [
+            129183,
+            145046,
+            1886198,
+            839317,
+            1312,
+            10404
+          ],
+          [
+            532300,
+            535815,
+            331530,
+            4907368,
+            565,
+            27947
+          ],
+          [
+            18297,
+            7308,
+            10288,
+            65675,
+            2393,
+            0
+          ],
+          [
+            329901,
+            780906,
+            425168,
+            1731009,
+            3,
+            949132
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.9027369713680465,
+        "macro_foreground_dice": 0.6643290406570139,
+        "dice_per_class": {
+          "background": 0.9537287650825906,
+          "interior": 0.785467710750048,
+          "boundary": 0.5431903705639799
+        },
+        "iou_per_class": {
+          "background": 0.9115502111246289,
+          "interior": 0.6467244368077875,
+          "boundary": 0.3728629737121295
+        },
+        "confusion_matrix": [
+          [
+            128375855,
+            2831618,
+            7453758
+          ],
+          [
+            962110,
+            13581889,
+            1921905
+          ],
+          [
+            1209115,
+            1703523,
+            7305983
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 256.15731059992686
+    },
+    {
+      "epoch": 13,
+      "training_loss": 0.8070849104818091,
+      "training_semantic_loss": 0.6075191617640386,
+      "training_spatial_loss": 0.39913149321653757,
+      "validation_loss": 0.7973269068357673,
+      "validation_semantic_loss": 0.5978499255502088,
+      "validation_spatial_loss": 0.3989539624497647,
+      "validation_semantic_dice": 0.48478399430132857,
+      "validation_spatial_dice": 0.6578821995826322,
+      "selection_score": 0.5713330969419803,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8812568796746135,
+        "macro_foreground_dice": 0.48478399430132857,
+        "dice_per_class": {
+          "background": 0.9496932407275336,
+          "neoplastic": 0.6842853445132773,
+          "inflammatory": 0.5615782367666694,
+          "connective": 0.4936725037909198,
+          "dead": 0.1297118979546954,
+          "epithelial": 0.554671988481081
+        },
+        "iou_per_class": {
+          "background": 0.9042055878849847,
+          "neoplastic": 0.5200864348965843,
+          "inflammatory": 0.3904127781717761,
+          "connective": 0.32773251834898287,
+          "dead": 0.0693539662754874,
+          "epithelial": 0.38376893276853263
+        },
+        "confusion_matrix": [
+          [
+            126703979,
+            4682150,
+            1082629,
+            4900109,
+            12483,
+            1279881
+          ],
+          [
+            754681,
+            9796061,
+            591505,
+            1376261,
+            4613,
+            494339
+          ],
+          [
+            80003,
+            86318,
+            2325311,
+            462748,
+            2618,
+            54462
+          ],
+          [
+            401557,
+            519560,
+            781925,
+            4513761,
+            3787,
+            114935
+          ],
+          [
+            13644,
+            5457,
+            22821,
+            52643,
+            8847,
+            549
+          ],
+          [
+            216285,
+            524503,
+            465692,
+            645412,
+            101,
+            2364126
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.9004419139732863,
+        "macro_foreground_dice": 0.6578821995826322,
+        "dice_per_class": {
+          "background": 0.9520769576074564,
+          "interior": 0.7754316638370465,
+          "boundary": 0.5403327353282178
+        },
+        "iou_per_class": {
+          "background": 0.9085370958479373,
+          "interior": 0.6332285760930043,
+          "boundary": 0.37017527789096233
+        },
+        "confusion_matrix": [
+          [
+            127687139,
+            3883327,
+            7090765
+          ],
+          [
+            765806,
+            14254466,
+            1445632
+          ],
+          [
+            1114433,
+            2161544,
+            6942644
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 258.35600859997794
+    },
+    {
+      "epoch": 14,
+      "training_loss": 0.803029118891222,
+      "training_semantic_loss": 0.6036542767142675,
+      "training_spatial_loss": 0.3987496845334409,
+      "validation_loss": 0.7688929193147085,
+      "validation_semantic_loss": 0.5745613908583798,
+      "validation_spatial_loss": 0.38866305666469225,
+      "validation_semantic_dice": 0.5067378319494654,
+      "validation_spatial_dice": 0.657043934584757,
+      "selection_score": 0.5818908832671112,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8794638309313485,
+        "macro_foreground_dice": 0.5067378319494654,
+        "dice_per_class": {
+          "background": 0.9465408151680922,
+          "neoplastic": 0.6829464425905734,
+          "inflammatory": 0.6088264409781399,
+          "connective": 0.49297234873317597,
+          "dead": 0.18906316768468945,
+          "epithelial": 0.5598807597607489
+        },
+        "iou_per_class": {
+          "background": 0.8985073449420105,
+          "neoplastic": 0.5185411320203958,
+          "inflammatory": 0.4376351441053899,
+          "connective": 0.3271156626215703,
+          "dead": 0.10440075231280667,
+          "epithelial": 0.3887738904646079
+        },
+        "confusion_matrix": [
+          [
+            125626570,
+            5646446,
+            936922,
+            4462885,
+            23829,
+            1964579
+          ],
+          [
+            592318,
+            10580348,
+            314721,
+            591119,
+            6899,
+            932055
+          ],
+          [
+            69335,
+            198253,
+            2294325,
+            323277,
+            4612,
+            121658
+          ],
+          [
+            329153,
+            985557,
+            737248,
+            3963949,
+            4535,
+            315083
+          ],
+          [
+            12234,
+            10868,
+            19042,
+            45923,
+            15043,
+            851
+          ],
+          [
+            152694,
+            545483,
+            223159,
+            359153,
+            253,
+            2935377
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.8937669739766408,
+        "macro_foreground_dice": 0.657043934584757,
+        "dice_per_class": {
+          "background": 0.9484111494175871,
+          "interior": 0.7783984897573073,
+          "boundary": 0.5356893794122067
+        },
+        "iou_per_class": {
+          "background": 0.9018839909650224,
+          "interior": 0.6371950944974394,
+          "boundary": 0.36583042687839973
+        },
+        "confusion_matrix": [
+          [
+            126217355,
+            3504020,
+            8939856
+          ],
+          [
+            478251,
+            13727712,
+            2259941
+          ],
+          [
+            809066,
+            1574046,
+            7835509
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 265.39914519991726
+    },
+    {
+      "epoch": 15,
+      "training_loss": 0.7826901425618723,
+      "training_semantic_loss": 0.5864286866622517,
+      "training_spatial_loss": 0.3925229156591806,
+      "validation_loss": 0.7810361528321746,
+      "validation_semantic_loss": 0.5868748069288274,
+      "validation_spatial_loss": 0.3883226930745739,
+      "validation_semantic_dice": 0.5042188868145651,
+      "validation_spatial_dice": 0.6765032185146154,
+      "selection_score": 0.5903610526645902,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8965797767437104,
+        "macro_foreground_dice": 0.5042188868145651,
+        "dice_per_class": {
+          "background": 0.9570697539571433,
+          "neoplastic": 0.6958391950776703,
+          "inflammatory": 0.5811584078021259,
+          "connective": 0.5603042132790617,
+          "dead": 0.11009710521262117,
+          "epithelial": 0.5736955127013461
+        },
+        "iou_per_class": {
+          "background": 0.9176737922679968,
+          "neoplastic": 0.5335532186302069,
+          "inflammatory": 0.4096006284266556,
+          "connective": 0.3891823664742498,
+          "dead": 0.05825542969233216,
+          "epithelial": 0.4022251334200703
+        },
+        "confusion_matrix": [
+          [
+            129039718,
+            4663084,
+            385155,
+            2830433,
+            3485,
+            1739356
+          ],
+          [
+            887882,
+            10309096,
+            141579,
+            848848,
+            1224,
+            828831
+          ],
+          [
+            138407,
+            325858,
+            1578890,
+            705738,
+            3156,
+            259411
+          ],
+          [
+            673960,
+            776401,
+            226522,
+            4356479,
+            1306,
+            300857
+          ],
+          [
+            23844,
+            12906,
+            9865,
+            48981,
+            6593,
+            1772
+          ],
+          [
+            230785,
+            525880,
+            80125,
+            424402,
+            42,
+            2954885
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.910999094527712,
+        "macro_foreground_dice": 0.6765032185146154,
+        "dice_per_class": {
+          "background": 0.9590796387189173,
+          "interior": 0.783608877884119,
+          "boundary": 0.5693975591451116
+        },
+        "iou_per_class": {
+          "background": 0.9213765763391907,
+          "interior": 0.6442079883985437,
+          "boundary": 0.3980124337023047
+        },
+        "confusion_matrix": [
+          [
+            129881686,
+            3039878,
+            5739667
+          ],
+          [
+            823547,
+            13572869,
+            2069488
+          ],
+          [
+            1480045,
+            1563297,
+            7175279
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 269.70730150002055
+    },
+    {
+      "epoch": 16,
+      "training_loss": 0.7908185824572321,
+      "training_semantic_loss": 0.5944448056440037,
+      "training_spatial_loss": 0.3927475522350834,
+      "validation_loss": 0.8085378324459785,
+      "validation_semantic_loss": 0.6129831300877305,
+      "validation_spatial_loss": 0.3911094044103925,
+      "validation_semantic_dice": 0.4750004077412557,
+      "validation_spatial_dice": 0.668106531444139,
+      "selection_score": 0.5715534695926974,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8883904646454911,
+        "macro_foreground_dice": 0.4750004077412557,
+        "dice_per_class": {
+          "background": 0.952917976837397,
+          "neoplastic": 0.6920788972911173,
+          "inflammatory": 0.5289585730241776,
+          "connective": 0.5231888562839497,
+          "dead": 0.058876019488515695,
+          "epithelial": 0.571899692618518
+        },
+        "iou_per_class": {
+          "background": 0.9100700382184069,
+          "neoplastic": 0.5291442242637783,
+          "inflammatory": 0.3595810174507556,
+          "connective": 0.3542693041762044,
+          "dead": 0.03033089080327673,
+          "epithelial": 0.40046185107762816
+        },
+        "confusion_matrix": [
+          [
+            127708008,
+            4902096,
+            222638,
+            4025976,
+            1163,
+            1801350
+          ],
+          [
+            825917,
+            10538820,
+            78132,
+            1168728,
+            851,
+            405012
+          ],
+          [
+            127768,
+            468913,
+            1259736,
+            957077,
+            2158,
+            195808
+          ],
+          [
+            534952,
+            795314,
+            136199,
+            4638809,
+            634,
+            229617
+          ],
+          [
+            20473,
+            11836,
+            4300,
+            62565,
+            3299,
+            1488
+          ],
+          [
+            157329,
+            721106,
+            50615,
+            544148,
+            0,
+            2742921
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.905273159838466,
+        "macro_foreground_dice": 0.668106531444139,
+        "dice_per_class": {
+          "background": 0.9555396959927713,
+          "interior": 0.7810866885557173,
+          "boundary": 0.5551263743325607
+        },
+        "iou_per_class": {
+          "background": 0.9148645404011048,
+          "interior": 0.6408057744731761,
+          "boundary": 0.3842041023318755
+        },
+        "confusion_matrix": [
+          [
+            128643262,
+            3293593,
+            6724376
+          ],
+          [
+            742415,
+            13785761,
+            1937728
+          ],
+          [
+            1210900,
+            1753669,
+            7254052
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 274.8446806999855
+    },
+    {
+      "epoch": 17,
+      "training_loss": 0.7752580841531954,
+      "training_semantic_loss": 0.5804499791239399,
+      "training_spatial_loss": 0.38961620956479787,
+      "validation_loss": 0.7648868549622897,
+      "validation_semantic_loss": 0.5724389551988509,
+      "validation_spatial_loss": 0.3848958007301589,
+      "validation_semantic_dice": 0.5328081300678058,
+      "validation_spatial_dice": 0.679351343483383,
+      "selection_score": 0.6060797367755943,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8972053688514388,
+        "macro_foreground_dice": 0.5328081300678058,
+        "dice_per_class": {
+          "background": 0.9560820438908139,
+          "neoplastic": 0.7193997702980761,
+          "inflammatory": 0.621812384578296,
+          "connective": 0.5352919904690352,
+          "dead": 0.20816264703170484,
+          "epithelial": 0.5793738579619164
+        },
+        "iou_per_class": {
+          "background": 0.9158593721811743,
+          "neoplastic": 0.561767641151779,
+          "inflammatory": 0.4511812307847732,
+          "connective": 0.36545986434555566,
+          "dead": 0.11617273559280918,
+          "epithelial": 0.40782992852062044
+        },
+        "confusion_matrix": [
+          [
+            128694077,
+            4328607,
+            716567,
+            3419822,
+            71277,
+            1430881
+          ],
+          [
+            961765,
+            10817214,
+            228307,
+            776074,
+            35453,
+            198647
+          ],
+          [
+            116247,
+            193811,
+            2107953,
+            491501,
+            30437,
+            71511
+          ],
+          [
+            562653,
+            902031,
+            471189,
+            4225402,
+            29570,
+            144680
+          ],
+          [
+            19395,
+            8336,
+            9097,
+            33937,
+            31607,
+            1589
+          ],
+          [
+            195999,
+            805428,
+            235456,
+            505018,
+            1371,
+            2472847
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.9115884292790678,
+        "macro_foreground_dice": 0.679351343483383,
+        "dice_per_class": {
+          "background": 0.9589205800926981,
+          "interior": 0.7883555991655928,
+          "boundary": 0.5703470878011732
+        },
+        "iou_per_class": {
+          "background": 0.921083023788983,
+          "interior": 0.6506493147846731,
+          "boundary": 0.3989409477884888
+        },
+        "confusion_matrix": [
+          [
+            129737554,
+            3174288,
+            5749389
+          ],
+          [
+            799329,
+            13924410,
+            1742165
+          ],
+          [
+            1392708,
+            1760599,
+            7065314
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 263.78638740000315
+    },
+    {
+      "epoch": 18,
+      "training_loss": 0.7759765767189394,
+      "training_semantic_loss": 0.5812798161732863,
+      "training_spatial_loss": 0.38939351913889486,
+      "validation_loss": 0.7955907863521232,
+      "validation_semantic_loss": 0.6016806101626183,
+      "validation_spatial_loss": 0.3878203552937762,
+      "validation_semantic_dice": 0.4827215398354692,
+      "validation_spatial_dice": 0.6785507766062684,
+      "selection_score": 0.5806361582208688,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8931149463552001,
+        "macro_foreground_dice": 0.4827215398354692,
+        "dice_per_class": {
+          "background": 0.9583386391919526,
+          "neoplastic": 0.704088434392138,
+          "inflammatory": 0.5716635880604276,
+          "connective": 0.4991911502730023,
+          "dead": 0.12427628424973264,
+          "epithelial": 0.5143882422020457
+        },
+        "iou_per_class": {
+          "background": 0.9200097798084217,
+          "neoplastic": 0.5433151868367478,
+          "inflammatory": 0.40023035419516606,
+          "connective": 0.33261474328580015,
+          "dead": 0.06625511167033658,
+          "epithelial": 0.34624674953064244
+        },
+        "confusion_matrix": [
+          [
+            129530131,
+            3121525,
+            1012233,
+            2225316,
+            30961,
+            2741065
+          ],
+          [
+            1160605,
+            9335448,
+            447002,
+            485819,
+            8305,
+            1580281
+          ],
+          [
+            122893,
+            103324,
+            2267728,
+            145791,
+            2612,
+            369112
+          ],
+          [
+            615297,
+            651372,
+            991072,
+            3109724,
+            6504,
+            961556
+          ],
+          [
+            19593,
+            6071,
+            37317,
+            22737,
+            10110,
+            8133
+          ],
+          [
+            212505,
+            282628,
+            166973,
+            134139,
+            249,
+            3419625
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.9109892726850516,
+        "macro_foreground_dice": 0.6785507766062684,
+        "dice_per_class": {
+          "background": 0.9587642275743764,
+          "interior": 0.7924964095698377,
+          "boundary": 0.5646051436426992
+        },
+        "iou_per_class": {
+          "background": 0.9207945529386448,
+          "interior": 0.6563097748533551,
+          "boundary": 0.3933448285272083
+        },
+        "confusion_matrix": [
+          [
+            129952180,
+            2406287,
+            6302764
+          ],
+          [
+            1062512,
+            13382535,
+            2020857
+          ],
+          [
+            1406740,
+            1518386,
+            7293495
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 261.16028519999236
+    },
+    {
+      "epoch": 19,
+      "training_loss": 0.7605296021035637,
+      "training_semantic_loss": 0.567195968455579,
+      "training_spatial_loss": 0.38666726334626417,
+      "validation_loss": 0.7432669474392815,
+      "validation_semantic_loss": 0.5548125684482432,
+      "validation_spatial_loss": 0.3769087569569018,
+      "validation_semantic_dice": 0.5340921427869522,
+      "validation_spatial_dice": 0.6759683886450993,
+      "selection_score": 0.6050302657160258,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8960010440183297,
+        "macro_foreground_dice": 0.5340921427869522,
+        "dice_per_class": {
+          "background": 0.9556916127126869,
+          "neoplastic": 0.7221165526492745,
+          "inflammatory": 0.5837696356526931,
+          "connective": 0.5192853393474756,
+          "dead": 0.22545609191277854,
+          "epithelial": 0.619833094372539
+        },
+        "iou_per_class": {
+          "background": 0.9151430979072989,
+          "neoplastic": 0.5650879617748769,
+          "inflammatory": 0.41219963245296815,
+          "connective": 0.3506991273515424,
+          "dead": 0.1270501625151656,
+          "epithelial": 0.4491000993033855
+        },
+        "confusion_matrix": [
+          [
+            128376789,
+            4448092,
+            1155181,
+            3245530,
+            84889,
+            1350750
+          ],
+          [
+            812964,
+            10664214,
+            461176,
+            774656,
+            28598,
+            275852
+          ],
+          [
+            91443,
+            128088,
+            2493741,
+            228209,
+            12986,
+            56993
+          ],
+          [
+            489712,
+            748648,
+            1055543,
+            3870055,
+            34948,
+            136619
+          ],
+          [
+            20205,
+            8062,
+            24998,
+            16045,
+            33929,
+            722
+          ],
+          [
+            205008,
+            521427,
+            341480,
+            435292,
+            1670,
+            2711242
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.9062466108897286,
+        "macro_foreground_dice": 0.6759683886450993,
+        "dice_per_class": {
+          "background": 0.9563614403148465,
+          "interior": 0.7899827611358551,
+          "boundary": 0.5619540161543437
+        },
+        "iou_per_class": {
+          "background": 0.9163722741361369,
+          "interior": 0.6528690135666328,
+          "boundary": 0.39077611040750804
+        },
+        "confusion_matrix": [
+          [
+            128687062,
+            2646262,
+            7327907
+          ],
+          [
+            699227,
+            13359562,
+            2407115
+          ],
+          [
+            1070528,
+            1350686,
+            7797407
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 256.2912947998848
+    },
+    {
+      "epoch": 20,
+      "training_loss": 0.7566648654370423,
+      "training_semantic_loss": 0.564056264528309,
+      "training_spatial_loss": 0.3852172037025532,
+      "validation_loss": 0.749588581017749,
+      "validation_semantic_loss": 0.5546747125656423,
+      "validation_spatial_loss": 0.3898277352536352,
+      "validation_semantic_dice": 0.5263734445544165,
+      "validation_spatial_dice": 0.6572710249301519,
+      "selection_score": 0.5918222347422841,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.882661687427889,
+        "macro_foreground_dice": 0.5263734445544165,
+        "dice_per_class": {
+          "background": 0.9476238983721456,
+          "neoplastic": 0.6945871434023133,
+          "inflammatory": 0.6150350624180815,
+          "connective": 0.5188864827730054,
+          "dead": 0.2229799368788683,
+          "epithelial": 0.5803785972998139
+        },
+        "iou_per_class": {
+          "background": 0.9004612485083285,
+          "neoplastic": 0.5320823522549213,
+          "inflammatory": 0.4440798793736272,
+          "connective": 0.35033539072986614,
+          "dead": 0.1254796957594444,
+          "epithelial": 0.40882632242364525
+        },
+        "confusion_matrix": [
+          [
+            125863708,
+            5004468,
+            891437,
+            4510394,
+            135531,
+            2255693
+          ],
+          [
+            567569,
+            10207147,
+            277137,
+            1003534,
+            37741,
+            924332
+          ],
+          [
+            73843,
+            148847,
+            2133179,
+            460980,
+            25257,
+            169354
+          ],
+          [
+            330724,
+            660519,
+            495095,
+            4455514,
+            28078,
+            365595
+          ],
+          [
+            10561,
+            7319,
+            11818,
+            30988,
+            41755,
+            1520
+          ],
+          [
+            133001,
+            344784,
+            116646,
+            376432,
+            2195,
+            3243061
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.8974812694920334,
+        "macro_foreground_dice": 0.6572710249301519,
+        "dice_per_class": {
+          "background": 0.9501899344910536,
+          "interior": 0.7761756264258632,
+          "boundary": 0.5383664234344405
+        },
+        "iou_per_class": {
+          "background": 0.9051065194639784,
+          "interior": 0.6342214154136098,
+          "boundary": 0.3683320033598673
+        },
+        "confusion_matrix": [
+          [
+            126619958,
+            4373233,
+            7668040
+          ],
+          [
+            420723,
+            14685844,
+            1359337
+          ],
+          [
+            813136,
+            2316568,
+            7088917
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 256.79964610002935
+    },
+    {
+      "epoch": 21,
+      "training_loss": 0.7495590807892472,
+      "training_semantic_loss": 0.5575535434062582,
+      "training_spatial_loss": 0.3840110753270158,
+      "validation_loss": 0.7430679596901668,
+      "validation_semantic_loss": 0.5530250316143945,
+      "validation_spatial_loss": 0.3800858563610736,
+      "validation_semantic_dice": 0.5502243140725621,
+      "validation_spatial_dice": 0.6746804818060329,
+      "selection_score": 0.6124523979392975,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8959819688386801,
+        "macro_foreground_dice": 0.5502243140725621,
+        "dice_per_class": {
+          "background": 0.954460174483767,
+          "neoplastic": 0.7185308886781899,
+          "inflammatory": 0.622170934231944,
+          "connective": 0.5394945787160598,
+          "dead": 0.2559047567352404,
+          "epithelial": 0.6150204120013764
+        },
+        "iou_per_class": {
+          "background": 0.9128874397610864,
+          "neoplastic": 0.5607087071627028,
+          "inflammatory": 0.4515588687230383,
+          "connective": 0.3693889600504094,
+          "dead": 0.14672636584697865,
+          "epithelial": 0.4440646037896608
+        },
+        "confusion_matrix": [
+          [
+            127969078,
+            4791238,
+            562630,
+            3867888,
+            74286,
+            1396111
+          ],
+          [
+            797175,
+            11096113,
+            160939,
+            757132,
+            21001,
+            185100
+          ],
+          [
+            102500,
+            332563,
+            1910756,
+            569549,
+            18782,
+            77310
+          ],
+          [
+            427693,
+            940588,
+            344205,
+            4467017,
+            21950,
+            134072
+          ],
+          [
+            17916,
+            12048,
+            11202,
+            26903,
+            35359,
+            533
+          ],
+          [
+            174051,
+            695546,
+            141030,
+            535993,
+            1006,
+            2668493
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.9079952617592435,
+        "macro_foreground_dice": 0.6746804818060329,
+        "dice_per_class": {
+          "background": 0.9567254824700013,
+          "interior": 0.7874365798076635,
+          "boundary": 0.5619243838044023
+        },
+        "iou_per_class": {
+          "background": 0.9170409766502242,
+          "interior": 0.6493982637895842,
+          "boundary": 0.39074745269025757
+        },
+        "confusion_matrix": [
+          [
+            128718364,
+            3579080,
+            6363787
+          ],
+          [
+            590509,
+            14332308,
+            1543087
+          ],
+          [
+            1110978,
+            2025152,
+            7082491
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 259.95350259984843
+    },
+    {
+      "epoch": 22,
+      "training_loss": 0.7423905470823667,
+      "training_semantic_loss": 0.5503710033035422,
+      "training_spatial_loss": 0.3840390871312604,
+      "validation_loss": 0.753822075867316,
+      "validation_semantic_loss": 0.5652161844641252,
+      "validation_spatial_loss": 0.37721178313643233,
+      "validation_semantic_dice": 0.539436387094172,
+      "validation_spatial_dice": 0.6755759196647455,
+      "selection_score": 0.6075061533794588,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8957145473996926,
+        "macro_foreground_dice": 0.539436387094172,
+        "dice_per_class": {
+          "background": 0.9549696956028241,
+          "neoplastic": 0.7121362950881723,
+          "inflammatory": 0.6063008199142187,
+          "connective": 0.5233488900720763,
+          "dead": 0.2513634075399933,
+          "epithelial": 0.6040325228563991
+        },
+        "iou_per_class": {
+          "background": 0.9138200984072867,
+          "neoplastic": 0.5529593639234737,
+          "inflammatory": 0.43502990356706767,
+          "connective": 0.35441607469324377,
+          "dead": 0.1437482256884329,
+          "epithelial": 0.43269813426624926
+        },
+        "confusion_matrix": [
+          [
+            128107534,
+            5274594,
+            984690,
+            2756324,
+            74689,
+            1463400
+          ],
+          [
+            750827,
+            11452045,
+            273307,
+            377078,
+            27528,
+            136675
+          ],
+          [
+            93732,
+            258224,
+            2319713,
+            217858,
+            16485,
+            105448
+          ],
+          [
+            483428,
+            1260694,
+            830784,
+            3541027,
+            26725,
+            192867
+          ],
+          [
+            17053,
+            15958,
+            18066,
+            15564,
+            35951,
+            1369
+          ],
+          [
+            182738,
+            883534,
+            214000,
+            288809,
+            709,
+            2646329
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.9059789596292994,
+        "macro_foreground_dice": 0.6755759196647455,
+        "dice_per_class": {
+          "background": 0.9554855307376553,
+          "interior": 0.7899550373629937,
+          "boundary": 0.5611968019664973
+        },
+        "iou_per_class": {
+          "background": 0.9147652415121034,
+          "interior": 0.652831144093583,
+          "boundary": 0.39004417194340285
+        },
+        "confusion_matrix": [
+          [
+            128339904,
+            3242357,
+            7078970
+          ],
+          [
+            603260,
+            13977923,
+            1884721
+          ],
+          [
+            1033695,
+            1702977,
+            7481949
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 260.6245200999547
+    },
+    {
+      "epoch": 23,
+      "training_loss": 0.7394911007708814,
+      "training_semantic_loss": 0.5486045061913599,
+      "training_spatial_loss": 0.38177319086459743,
+      "validation_loss": 0.7633966920745836,
+      "validation_semantic_loss": 0.5717993416681146,
+      "validation_spatial_loss": 0.38319470016340224,
+      "validation_semantic_dice": 0.519723678737688,
+      "validation_spatial_dice": 0.6775914494431512,
+      "selection_score": 0.5986575640904196,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8924031833027514,
+        "macro_foreground_dice": 0.519723678737688,
+        "dice_per_class": {
+          "background": 0.9558228802412845,
+          "neoplastic": 0.7018992761903421,
+          "inflammatory": 0.5704990413407421,
+          "connective": 0.5280624275369794,
+          "dead": 0.22867945665873127,
+          "epithelial": 0.5694781919616446
+        },
+        "iou_per_class": {
+          "background": 0.9153838579245563,
+          "neoplastic": 0.5407124911928348,
+          "inflammatory": 0.39908965285047343,
+          "connective": 0.3587532769160602,
+          "dead": 0.1291011147126255,
+          "epithelial": 0.3980912340948917
+        },
+        "confusion_matrix": [
+          [
+            128518397,
+            3824641,
+            1207008,
+            3190723,
+            59070,
+            1861392
+          ],
+          [
+            888457,
+            9571420,
+            501873,
+            1246015,
+            14291,
+            795404
+          ],
+          [
+            98023,
+            88114,
+            2441848,
+            285187,
+            9265,
+            89023
+          ],
+          [
+            539252,
+            465074,
+            952775,
+            4133514,
+            14903,
+            230007
+          ],
+          [
+            18246,
+            5217,
+            25185,
+            27372,
+            26128,
+            1813
+          ],
+          [
+            193156,
+            300990,
+            420244,
+            437063,
+            894,
+            2863772
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.9096546935259712,
+        "macro_foreground_dice": 0.6775914494431512,
+        "dice_per_class": {
+          "background": 0.9583128953907425,
+          "interior": 0.7852497524704373,
+          "boundary": 0.569933146415865
+        },
+        "iou_per_class": {
+          "background": 0.9199623295233273,
+          "interior": 0.6464289709488839,
+          "boundary": 0.39853601598237043
+        },
+        "confusion_matrix": [
+          [
+            129483731,
+            2904189,
+            6273311
+          ],
+          [
+            793509,
+            13475735,
+            2196660
+          ],
+          [
+            1294209,
+            1476335,
+            7448077
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 259.1820314999204
+    },
+    {
+      "epoch": 24,
+      "training_loss": 0.7411193865160626,
+      "training_semantic_loss": 0.5501144772776997,
+      "training_spatial_loss": 0.3820098192846201,
+      "validation_loss": 0.7543644172097385,
+      "validation_semantic_loss": 0.5596234992431094,
+      "validation_spatial_loss": 0.38948183493798333,
+      "validation_semantic_dice": 0.5310307379067899,
+      "validation_spatial_dice": 0.6546762577221592,
+      "selection_score": 0.5928534978144746,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8805842406986243,
+        "macro_foreground_dice": 0.5310307379067899,
+        "dice_per_class": {
+          "background": 0.9442707198220134,
+          "neoplastic": 0.6918224121152968,
+          "inflammatory": 0.6076939892811352,
+          "connective": 0.5078415283656678,
+          "dead": 0.2415191659135495,
+          "epithelial": 0.6062765938583005
+        },
+        "iou_per_class": {
+          "background": 0.8944250553160918,
+          "neoplastic": 0.5288444157141996,
+          "inflammatory": 0.4364658233195267,
+          "connective": 0.3403402105202933,
+          "dead": 0.137345350163581,
+          "epithelial": 0.43500495951106993
+        },
+        "confusion_matrix": [
+          [
+            124856864,
+            6855667,
+            1092031,
+            4018857,
+            32800,
+            1805012
+          ],
+          [
+            465164,
+            11711093,
+            307216,
+            383066,
+            7856,
+            143065
+          ],
+          [
+            60702,
+            219953,
+            2339246,
+            322302,
+            6604,
+            62653
+          ],
+          [
+            282779,
+            1297985,
+            706066,
+            3902267,
+            7597,
+            138831
+          ],
+          [
+            12197,
+            20585,
+            16516,
+            31874,
+            21914,
+            875
+          ],
+          [
+            112478,
+            733035,
+            226228,
+            374159,
+            736,
+            2769483
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.8929287365561411,
+        "macro_foreground_dice": 0.6546762577221592,
+        "dice_per_class": {
+          "background": 0.9471570991505626,
+          "interior": 0.7735156660239735,
+          "boundary": 0.535836849420345
+        },
+        "iou_per_class": {
+          "background": 0.8996186405268942,
+          "interior": 0.6306771677355099,
+          "boundary": 0.36596799284848136
+        },
+        "confusion_matrix": [
+          [
+            125643655,
+            4526722,
+            8490854
+          ],
+          [
+            328179,
+            14581854,
+            1555871
+          ],
+          [
+            673831,
+            2128322,
+            7416468
+          ]
+        ]
+      },
+      "learning_rate": 0.0003,
+      "duration_seconds": 253.9084747999441
+    },
+    {
+      "epoch": 25,
+      "training_loss": 0.7322835985975094,
+      "training_semantic_loss": 0.5415274375174419,
+      "training_spatial_loss": 0.3815123217561877,
+      "validation_loss": 0.7442057869325861,
+      "validation_semantic_loss": 0.5532815035160711,
+      "validation_spatial_loss": 0.3818485669706244,
+      "validation_semantic_dice": 0.5277336724053356,
+      "validation_spatial_dice": 0.6622685406438017,
+      "selection_score": 0.5950011065245686,
+      "semantic_metrics": {
+        "pixel_accuracy": 0.8848301313521467,
+        "macro_foreground_dice": 0.5277336724053356,
+        "dice_per_class": {
+          "background": 0.9474447546391908,
+          "neoplastic": 0.6996754786163588,
+          "inflammatory": 0.5820976661400163,
+          "connective": 0.5146895241994492,
+          "dead": 0.22221634872703006,
+          "epithelial": 0.6199893443438242
+        },
+        "iou_per_class": {
+          "background": 0.9001377921159973,
+          "neoplastic": 0.5380775853337385,
+          "inflammatory": 0.41053438748165416,
+          "connective": 0.3465198236900891,
+          "dead": 0.12499628319110345,
+          "epithelial": 0.4492641718400558
+        },
+        "confusion_matrix": [
+          [
+            125772384,
+            6288382,
+            1242346,
+            3452538,
+            113172,
+            1792409
+          ],
+          [
+            520978,
+            11421746,
+            414490,
+            466656,
+            20643,
+            172947
+          ],
+          [
+            65540,
+            199787,
+            2433833,
+            214556,
+            8701,
+            89043
+          ],
+          [
+            345259,
+            1050533,
+            968073,
+            3721056,
+            21593,
+            229011
+          ],
+          [
+            11897,
+            10595,
+            27401,
+            19876,
+            33630,
+            562
+          ],
+          [
+            120796,
+            660193,
+            264681,
+            249213,
+            978,
+            2920258
+          ]
+        ]
+      },
+      "spatial_metrics": {
+        "pixel_accuracy": 0.897449221496801,
+        "macro_foreground_dice": 0.6622685406438017,
+        "dice_per_class": {
+          "background": 0.9501468394017714,
+          "interior": 0.7820404034537526,
+          "boundary": 0.5424966778338508
+        },
+        "iou_per_class": {
+          "background": 0.9050283173509307,
+          "interior": 0.6420905961670442,
+          "boundary": 0.37220956520880466
+        },
+        "confusion_matrix": [
+          [
+            126574873,
+            3878395,
+            8207963
+          ],
+          [
+            426307,
+            14313542,
+            1726055
+          ],
+          [
+            769824,
+            1947792,
+            7501005
+          ]
+        ]
+      },
+      "learning_rate": 0.00015,
+      "duration_seconds": 257.97142839990556
+    }
+  ],
+  "subset_sampling": "seeded random without replacement"
+}
