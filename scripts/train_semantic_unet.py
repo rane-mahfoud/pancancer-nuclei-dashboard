@@ -21,7 +21,11 @@ from pancancer_nuclei.data.transforms import (
     create_training_transforms,
     create_validation_transforms,
 )
-from pancancer_nuclei.models.losses import CombinedSegmentationLoss
+from pancancer_nuclei.evaluation.semantic import DEFAULT_CLASS_NAMES
+from pancancer_nuclei.models.losses import (
+    CombinedSegmentationLoss,
+    calculate_log_class_weights,
+)
 from pancancer_nuclei.models.unet import UNet
 from pancancer_nuclei.training.engine import (
     evaluate_semantic_model,
@@ -32,6 +36,7 @@ from pancancer_nuclei.training.engine import (
 DATASET_NAME = "RationAI/PanNuke"
 REVISION = "1f498f7bd6a85ef5f204c592b41ac881eab61005"
 CACHE_DIR = "data/raw/huggingface_cache"
+CLASS_AUDIT_PATH = Path("reports/fold1_semantic_pixel_audit.json")
 SEED = 42
 
 
@@ -45,6 +50,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--train-limit", type=int)
     parser.add_argument("--validation-limit", type=int)
     parser.add_argument("--run-name", type=str)
+    parser.add_argument("--class-balanced", action="store_true")
     return parser.parse_args()
 
 
@@ -274,7 +280,33 @@ def main() -> None:
         number_of_classes=6,
         base_channels=base_channels,
     ).to(device)
-    criterion = CombinedSegmentationLoss()
+    class_weights = None
+    class_weight_report = None
+
+    if arguments.class_balanced:
+        audit = json.loads(CLASS_AUDIT_PATH.read_text(encoding="utf-8"))
+        pixel_counts = torch.tensor(
+            [audit["pixel_counts"][class_name] for class_name in DEFAULT_CLASS_NAMES],
+            dtype=torch.float32,
+            device=device,
+        )
+        class_weights = calculate_log_class_weights(pixel_counts)
+        class_weight_report = {
+            class_name: weight.item()
+            for class_name, weight in zip(
+                DEFAULT_CLASS_NAMES,
+                class_weights,
+                strict=True,
+            )
+        }
+
+        print("Class weights:")
+        for class_name, weight in class_weight_report.items():
+            print(f"  {class_name}: {weight:.4f}")
+
+    criterion = CombinedSegmentationLoss(
+        class_weights=class_weights,
+    ).to(device)
     optimizer = torch.optim.AdamW(
         model.parameters(),
         lr=3.0e-4,
@@ -371,6 +403,8 @@ def main() -> None:
             "best_validation_macro_foreground_dice": (best_validation_dice),
             "history": history,
             "subset_sampling": "seeded random without replacement",
+            "class_balanced": arguments.class_balanced,
+            "class_weights": class_weight_report,
         }
         report_path.write_text(
             json.dumps(report, indent=2),

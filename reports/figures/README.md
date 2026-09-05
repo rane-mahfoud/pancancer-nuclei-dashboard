@@ -99,3 +99,26 @@ This figure records a reproducibly sampled semantic U-Net training pilot.
 - Best validation macro foreground Dice: 0.1065
 - Fold 3 used: no
 - Purpose: limited-data training diagnostic; not a final result
+
+## `unet_pilot_random_training_curve.png`
+
+This figure records an unweighted, reproducibly sampled semantic U-Net pilot.
+
+- Training: 256 randomly selected Fold 1 images
+- Validation: 128 randomly selected Fold 2 images
+- Epochs: 5
+- Best macro foreground Dice: 0.1065
+- Fold 3 used: no
+- Purpose: limited-data diagnostic, not a final result
+
+## `unet_pilot_weighted_training_curve.png`
+
+This figure records the matched class-balanced pilot.
+
+- Training: the same 256 Fold 1 images
+- Validation: the same 128 Fold 2 images
+- Epochs: 5
+- Best macro foreground Dice: 0.1661
+- Only controlled change: logarithmic Fold 1 class weights
+- Fold 3 used: no
+- Purpose: loss-selection pilot, not a final result

@@ -5,6 +5,33 @@ from torch import nn
 from torch.nn import functional as F
 
 
+def calculate_log_class_weights(
+    pixel_counts: torch.Tensor,
+    offset: float = 1.02,
+) -> torch.Tensor:
+    """Create gentle class weights from training pixel counts."""
+    if pixel_counts.ndim != 1:
+        raise ValueError("pixel_counts must be one-dimensional.")
+
+    if pixel_counts.numel() < 2:
+        raise ValueError("At least two classes are required.")
+
+    if (pixel_counts <= 0).any():
+        raise ValueError("Every class must have a positive count.")
+
+    if offset <= 1.0:
+        raise ValueError("The logarithmic offset must exceed one.")
+
+    counts = pixel_counts.to(torch.float64)
+    frequencies = counts / counts.sum()
+    weights = 1.0 / torch.log(offset + frequencies)
+
+    # Keep the average weight equal to one.
+    weights = weights / weights.mean()
+
+    return weights.to(torch.float32)
+
+
 class MulticlassDiceLoss(nn.Module):
     """Measure overlap between predicted and true nucleus classes."""
 

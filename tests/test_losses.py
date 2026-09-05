@@ -4,6 +4,7 @@ import torch
 from pancancer_nuclei.models.losses import (
     CombinedSegmentationLoss,
     MulticlassDiceLoss,
+    calculate_log_class_weights,
 )
 
 
@@ -64,3 +65,20 @@ def test_combined_loss_rejects_zero_weights() -> None:
             cross_entropy_weight=0,
             dice_weight=0,
         )
+
+
+def test_log_weights_emphasize_rare_classes_gently() -> None:
+    counts = torch.tensor([1000, 100, 10])
+
+    weights = calculate_log_class_weights(counts)
+
+    assert weights.mean().item() == pytest.approx(1.0)
+    assert weights[2] > weights[1] > weights[0]
+    assert torch.isfinite(weights).all()
+
+
+def test_log_weights_reject_missing_classes() -> None:
+    counts = torch.tensor([1000, 0, 10])
+
+    with pytest.raises(ValueError, match="positive count"):
+        calculate_log_class_weights(counts)
