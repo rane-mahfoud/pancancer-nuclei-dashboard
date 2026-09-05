@@ -88,17 +88,38 @@ def prepare_pannuke_sample(
 class PanNukeDataset(Dataset):
     """PyTorch wrapper around a loaded PanNuke split."""
 
-    def __init__(self, records: Any) -> None:
+    def __init__(
+        self,
+        records: Any,
+        transform: Any | None = None,
+    ) -> None:
         self.records = records
+        self.transform = transform
 
     def __len__(self) -> int:
         return len(self.records)
 
     def __getitem__(self, index: int) -> dict[str, Any]:
-        raw_sample = self.records[index]
+        raw_sample = dict(self.records[index])
+
+        if self.transform is not None:
+            image = np.asarray(raw_sample["image"], dtype=np.uint8)
+            masks = [np.asarray(mask, dtype=np.uint8) for mask in raw_sample["instances"]]
+
+            transformed = self.transform(
+                image=image,
+                masks=masks,
+            )
+
+            raw_sample["image"] = transformed["image"]
+            raw_sample["instances"] = [
+                np.asarray(mask, dtype=bool) for mask in transformed["masks"]
+            ]
+
         prepared_sample = prepare_pannuke_sample(raw_sample)
 
-        tissue_feature = self.records.features.get("tissue")
+        features = getattr(self.records, "features", {})
+        tissue_feature = features.get("tissue")
         tissue_value = raw_sample["tissue"]
 
         if isinstance(tissue_value, (int, np.integer)) and hasattr(tissue_feature, "int2str"):

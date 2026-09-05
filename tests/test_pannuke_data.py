@@ -1,9 +1,11 @@
+import albumentations as A
 import numpy as np
 import pytest
 import torch
 
 from pancancer_nuclei.data.pannuke import (
     IGNORE_LABEL,
+    PanNukeDataset,
     prepare_pannuke_sample,
 )
 
@@ -73,3 +75,32 @@ def test_rejects_mismatched_annotations() -> None:
 
     with pytest.raises(ValueError, match="number of instance masks"):
         prepare_pannuke_sample(sample)
+
+
+def test_transformation_keeps_image_and_mask_aligned() -> None:
+    image = np.zeros((3, 4, 3), dtype=np.uint8)
+    image[1, 0] = [255, 0, 0]
+
+    nucleus_mask = np.zeros((3, 4), dtype=bool)
+    nucleus_mask[1, 0] = True
+
+    records = [
+        {
+            "image": image,
+            "instances": [nucleus_mask],
+            "categories": [0],
+            "tissue": "Breast",
+        }
+    ]
+
+    horizontal_flip = A.Compose([A.HorizontalFlip(p=1.0)])
+    dataset = PanNukeDataset(records, transform=horizontal_flip)
+
+    result = dataset[0]
+
+    assert result["image"][0, 1, 3].item() == 1.0
+    assert result["instance_masks"][0, 1, 3].item()
+    assert result["semantic_mask"][1, 3].item() == 1
+
+    assert result["image"][0, 1, 0].item() == 0.0
+    assert not result["instance_masks"][0, 1, 0].item()
