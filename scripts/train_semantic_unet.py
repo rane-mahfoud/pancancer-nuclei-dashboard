@@ -3,6 +3,7 @@
 import argparse
 import json
 import random
+import time
 from pathlib import Path
 from typing import Any
 
@@ -51,6 +52,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--validation-limit", type=int)
     parser.add_argument("--run-name", type=str)
     parser.add_argument("--class-balanced", action="store_true")
+    parser.add_argument("--resume", action="store_true")
     return parser.parse_args()
 
 
@@ -264,6 +266,7 @@ def main() -> None:
     report_path = Path(f"reports/{run_name}_training.json")
     figure_path = Path(f"reports/figures/{run_name}_training_curve.png")
     checkpoint_path = Path(f"models/checkpoints/{run_name}_best.pt")
+    last_checkpoint_path = Path(f"models/checkpoints/{run_name}_last.pt")
 
     report_path.parent.mkdir(parents=True, exist_ok=True)
     figure_path.parent.mkdir(parents=True, exist_ok=True)
@@ -322,6 +325,31 @@ def main() -> None:
 
     history: list[dict[str, Any]] = []
     best_validation_dice = -1.0
+    start_epoch = 1
+
+    if arguments.resume:
+        if not last_checkpoint_path.exists():
+            raise FileNotFoundError(f"No resumable checkpoint found at {last_checkpoint_path}.")
+
+        resume_checkpoint = torch.load(
+            last_checkpoint_path,
+            map_location=device,
+            weights_only=True,
+        )
+        model.load_state_dict(resume_checkpoint["model_state_dict"])
+        optimizer.load_state_dict(resume_checkpoint["optimizer_state_dict"])
+        scheduler.load_state_dict(resume_checkpoint["scheduler_state_dict"])
+        scaler.load_state_dict(resume_checkpoint["scaler_state_dict"])
+
+        history = resume_checkpoint["history"]
+        best_validation_dice = resume_checkpoint["best_validation_dice"]
+        start_epoch = resume_checkpoint["epoch"] + 1
+
+        generator_state = resume_checkpoint.get("data_generator_state")
+        if generator_state is not None and training_loader.generator is not None:
+            training_loader.generator.set_state(generator_state.cpu())
+
+        print(f"Resuming after epoch {resume_checkpoint['epoch']}.")
 
     print("GPU:", torch.cuda.get_device_name(device))
     print("Training samples:", len(training_loader.dataset))
@@ -330,7 +358,8 @@ def main() -> None:
     print("Batch size:", batch_size)
     print("------------------------")
 
-    for epoch in range(1, epochs + 1):
+    for epoch in range(start_epoch, epochs + 1):
+        epoch_start_time = time.perf_counter()
         training_loss = train_one_epoch(
             model=model,
             data_loader=training_loader,
@@ -345,6 +374,7 @@ def main() -> None:
             criterion=criterion,
             device=device,
         )
+        epoch_duration_seconds = time.perf_counter() - epoch_start_time
 
         validation_loss = validation_metrics["loss"]
         validation_dice = validation_metrics["macro_foreground_dice"] or 0.0
@@ -359,6 +389,7 @@ def main() -> None:
             "validation_pixel_accuracy": validation_metrics["pixel_accuracy"],
             "validation_dice_per_class": validation_metrics["dice_per_class"],
             "learning_rate": optimizer.param_groups[0]["lr"],
+            "duration_seconds": epoch_duration_seconds,
         }
         history.append(record)
 
@@ -366,7 +397,8 @@ def main() -> None:
             f"Epoch {epoch:02d}/{epochs} | "
             f"train loss={training_loss:.4f} | "
             f"validation loss={validation_loss:.4f} | "
-            f"validation Dice={validation_dice:.4f}"
+            f"validation Dice={validation_dice:.4f} | "
+            f"time={epoch_duration_seconds / 60.0:.1f} min"
         )
 
         if validation_dice > best_validation_dice:
@@ -381,6 +413,25 @@ def main() -> None:
                 },
                 checkpoint_path,
             )
+            last_checkpoint = {
+                "model_state_dict": model.state_dict(),
+                "optimizer_state_dict": optimizer.state_dict(),
+                "scheduler_state_dict": scheduler.state_dict(),
+                "scaler_state_dict": scaler.state_dict(),
+                "epoch": epoch,
+                "history": history,
+                "best_validation_dice": best_validation_dice,
+                "dataset_revision": REVISION,
+                "data_generator_state": (
+                    training_loader.generator.get_state()
+                    if training_loader.generator is not None
+                    else None
+                ),
+            }
+        torch.save(
+            last_checkpoint,
+            last_checkpoint_path,
+        )
 
         report = {
             "run_name": run_name,
@@ -420,6 +471,7 @@ def main() -> None:
     print("Saved checkpoint:", checkpoint_path)
     print("Saved report:", report_path)
     print("Saved figure:", figure_path)
+    print("Saved resumable checkpoint:", last_checkpoint_path)
     print("Training run completed!")
 
 
