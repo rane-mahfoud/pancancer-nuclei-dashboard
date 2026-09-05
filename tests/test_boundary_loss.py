@@ -65,7 +65,7 @@ def test_total_loss_combines_both_tasks() -> None:
 
 
 def test_both_predictions_receive_gradients() -> None:
-    """Both model heads should receive training gradients."""
+    """Both model heads should receive gradients."""
     (
         semantic_logits,
         spatial_logits,
