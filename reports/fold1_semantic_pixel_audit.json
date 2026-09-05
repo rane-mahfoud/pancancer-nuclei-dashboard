@@ -1,0 +1,32 @@
+{
+  "dataset": "RationAI/PanNuke",
+  "revision": "1f498f7bd6a85ef5f204c592b41ac881eab61005",
+  "split": "fold1",
+  "samples": 2656,
+  "total_valid_pixels": 174062400,
+  "ignored_overlap_pixels": 1216,
+  "pixel_counts": {
+    "background": 144404042,
+    "neoplastic": 15717975,
+    "inflammatory": 3114144,
+    "connective": 6441014,
+    "dead": 113771,
+    "epithelial": 4271454
+  },
+  "pixel_frequencies": {
+    "background": 0.8296107717692046,
+    "neoplastic": 0.09030080591787773,
+    "inflammatory": 0.017890963240768828,
+    "connective": 0.037004051420639957,
+    "dead": 0.0006536219194955373,
+    "epithelial": 0.024539785732013347
+  },
+  "samples_containing_class": {
+    "background": 2656,
+    "neoplastic": 1452,
+    "inflammatory": 1386,
+    "connective": 2044,
+    "dead": 65,
+    "epithelial": 498
+  }
+}

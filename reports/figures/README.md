@@ -84,3 +84,18 @@ and predictions from the smoke-test U-Net.
 - Interpretation: predictions remain noisy and are not scientific results
 - Fold 3 used: no
 - Dataset license: CC BY-NC-SA 4.0
+
+## `unet_pilot_random_training_curve.png`
+
+This figure records a reproducibly sampled semantic U-Net training pilot.
+
+- Training split: PanNuke Fold 1
+- Validation split: PanNuke Fold 2
+- Training samples: 256 randomly selected samples
+- Validation samples: 128 randomly selected samples
+- Epochs: 5
+- Batch size: 4
+- Base channels: 16
+- Best validation macro foreground Dice: 0.1065
+- Fold 3 used: no
+- Purpose: limited-data training diagnostic; not a final result

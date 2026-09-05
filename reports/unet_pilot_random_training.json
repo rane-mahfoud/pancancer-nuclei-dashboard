@@ -1,0 +1,349 @@
+{
+  "run_name": "unet_pilot_random",
+  "purpose": "pipeline smoke test",
+  "dataset": "RationAI/PanNuke",
+  "revision": "1f498f7bd6a85ef5f204c592b41ac881eab61005",
+  "training_split": "fold1",
+  "validation_split": "fold2",
+  "fold3_used": false,
+  "seed": 42,
+  "epochs": 5,
+  "batch_size": 4,
+  "base_channels": 16,
+  "training_samples": 256,
+  "validation_samples": 128,
+  "best_validation_macro_foreground_dice": 0.10649132344118721,
+  "history": [
+    {
+      "epoch": 1,
+      "training_loss": 1.0964678507298231,
+      "validation_loss": 0.9824571572244167,
+      "validation_macro_foreground_dice": 0.09704098325404778,
+      "validation_confusion_matrix": [
+        [
+          6619304,
+          229359,
+          0,
+          6418,
+          70746,
+          0
+        ],
+        [
+          343630,
+          442263,
+          0,
+          5490,
+          62342,
+          0
+        ],
+        [
+          57646,
+          104757,
+          0,
+          1994,
+          14788,
+          0
+        ],
+        [
+          91836,
+          188935,
+          0,
+          2396,
+          20039,
+          0
+        ],
+        [
+          1985,
+          7679,
+          0,
+          67,
+          694,
+          0
+        ],
+        [
+          22635,
+          84344,
+          0,
+          1239,
+          7966,
+          0
+        ]
+      ],
+      "validation_pixel_accuracy": 0.8421783640370829,
+      "validation_dice_per_class": {
+        "background": 0.9413878240867454,
+        "neoplastic": 0.46284526613997873,
+        "inflammatory": 0.0,
+        "connective": 0.014937190237212057,
+        "dead": 0.007422459893048129,
+        "epithelial": 0.0
+      },
+      "learning_rate": 0.0003
+    },
+    {
+      "epoch": 2,
+      "training_loss": 0.9422647580504417,
+      "validation_loss": 0.8952752742916346,
+      "validation_macro_foreground_dice": 0.10649132344118721,
+      "validation_confusion_matrix": [
+        [
+          6624696,
+          271090,
+          0,
+          28973,
+          1068,
+          0
+        ],
+        [
+          341497,
+          489739,
+          0,
+          21749,
+          740,
+          0
+        ],
+        [
+          60742,
+          110933,
+          0,
+          7296,
+          214,
+          0
+        ],
+        [
+          90891,
+          203624,
+          0,
+          8393,
+          298,
+          0
+        ],
+        [
+          2105,
+          8168,
+          0,
+          123,
+          29,
+          0
+        ],
+        [
+          21579,
+          90475,
+          0,
+          4054,
+          76,
+          0
+        ]
+      ],
+      "validation_pixel_accuracy": 0.8491163910052653,
+      "validation_dice_per_class": {
+        "background": 0.9418550220272679,
+        "neoplastic": 0.4830359106676648,
+        "inflammatory": 0.0,
+        "connective": 0.04490708786122838,
+        "dead": 0.004513618677042802,
+        "epithelial": 0.0
+      },
+      "learning_rate": 0.0003
+    },
+    {
+      "epoch": 3,
+      "training_loss": 0.8645496470853686,
+      "validation_loss": 0.8298670705407858,
+      "validation_macro_foreground_dice": 0.10264831777903724,
+      "validation_confusion_matrix": [
+        [
+          6703104,
+          213541,
+          0,
+          9179,
+          3,
+          0
+        ],
+        [
+          375925,
+          466934,
+          0,
+          10866,
+          0,
+          0
+        ],
+        [
+          71795,
+          101993,
+          0,
+          5395,
+          2,
+          0
+        ],
+        [
+          107063,
+          191520,
+          0,
+          4619,
+          4,
+          0
+        ],
+        [
+          2657,
+          7711,
+          0,
+          57,
+          0,
+          0
+        ],
+        [
+          26353,
+          87095,
+          0,
+          2736,
+          0,
+          0
+        ]
+      ],
+      "validation_pixel_accuracy": 0.8552914734271183,
+      "validation_dice_per_class": {
+        "background": 0.9432539462526677,
+        "neoplastic": 0.48575228645334584,
+        "inflammatory": 0.0,
+        "connective": 0.027489302441840398,
+        "dead": 0.0,
+        "epithelial": 0.0
+      },
+      "learning_rate": 0.0003
+    },
+    {
+      "epoch": 4,
+      "training_loss": 0.8059409726411104,
+      "validation_loss": 0.7799456883221865,
+      "validation_macro_foreground_dice": 0.10318763671017565,
+      "validation_confusion_matrix": [
+        [
+          6678424,
+          243373,
+          0,
+          4030,
+          0,
+          0
+        ],
+        [
+          338732,
+          510654,
+          0,
+          4339,
+          0,
+          0
+        ],
+        [
+          62226,
+          113594,
+          0,
+          3364,
+          1,
+          0
+        ],
+        [
+          96927,
+          204369,
+          0,
+          1910,
+          0,
+          0
+        ],
+        [
+          2372,
+          8022,
+          0,
+          31,
+          0,
+          0
+        ],
+        [
+          22131,
+          92973,
+          0,
+          1080,
+          0,
+          0
+        ]
+      ],
+      "validation_pixel_accuracy": 0.857238293331197,
+      "validation_dice_per_class": {
+        "background": 0.9455078451427831,
+        "neoplastic": 0.5039240937282591,
+        "inflammatory": 0.0,
+        "connective": 0.012014089822619197,
+        "dead": 0.0,
+        "epithelial": 0.0
+      },
+      "learning_rate": 0.0003
+    },
+    {
+      "epoch": 5,
+      "training_loss": 0.7620145799592137,
+      "validation_loss": 0.746029706671834,
+      "validation_macro_foreground_dice": 0.09702521003440637,
+      "validation_confusion_matrix": [
+        [
+          6740144,
+          184893,
+          0,
+          790,
+          0,
+          0
+        ],
+        [
+          396057,
+          456721,
+          0,
+          947,
+          0,
+          0
+        ],
+        [
+          64297,
+          113797,
+          0,
+          1091,
+          0,
+          0
+        ],
+        [
+          114307,
+          188536,
+          0,
+          363,
+          0,
+          0
+        ],
+        [
+          2985,
+          7431,
+          0,
+          9,
+          0,
+          0
+        ],
+        [
+          28906,
+          87027,
+          0,
+          251,
+          0,
+          0
+        ]
+      ],
+      "validation_pixel_accuracy": 0.8579821642638682,
+      "validation_dice_per_class": {
+        "background": 0.94449229474004,
+        "neoplastic": 0.4827585842410405,
+        "inflammatory": 0.0,
+        "connective": 0.002367465930991303,
+        "dead": 0.0,
+        "epithelial": 0.0
+      },
+      "learning_rate": 0.0003
+    }
+  ],
+  "subset_sampling": "seeded random without replacement"
+}

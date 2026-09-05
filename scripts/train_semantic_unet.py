@@ -44,6 +44,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--base-channels", type=int)
     parser.add_argument("--train-limit", type=int)
     parser.add_argument("--validation-limit", type=int)
+    parser.add_argument("--run-name", type=str)
     return parser.parse_args()
 
 
@@ -71,15 +72,23 @@ def set_random_seeds() -> None:
 def limit_dataset(
     dataset: PanNukeDataset,
     limit: int | None,
+    seed: int,
 ) -> PanNukeDataset | Subset:
-    """Optionally use only the first samples for a smoke test."""
+    """Optionally select a reproducible random subset."""
     if limit is None:
         return dataset
 
     if limit <= 0:
         raise ValueError("Dataset limits must be positive.")
 
-    return Subset(dataset, range(min(limit, len(dataset))))
+    generator = torch.Generator().manual_seed(seed)
+    number_selected = min(limit, len(dataset))
+    selected_indices = torch.randperm(
+        len(dataset),
+        generator=generator,
+    )[:number_selected].tolist()
+
+    return Subset(dataset, selected_indices)
 
 
 def create_data_loaders(
@@ -113,10 +122,12 @@ def create_data_loaders(
     training_dataset = limit_dataset(
         training_dataset,
         train_limit,
+        seed=SEED,
     )
     validation_dataset = limit_dataset(
         validation_dataset,
         validation_limit,
+        seed=SEED + 1,
     )
 
     generator = torch.Generator().manual_seed(SEED)
@@ -241,14 +252,12 @@ def main() -> None:
         else (16 if arguments.smoke_test else None)
     )
 
-    if arguments.smoke_test:
-        report_path = Path("reports/unet_smoke_training.json")
-        figure_path = Path("reports/figures/unet_smoke_training_curve.png")
-        checkpoint_path = Path("models/checkpoints/unet_smoke_best.pt")
-    else:
-        report_path = Path("reports/semantic_unet_training.json")
-        figure_path = Path("reports/figures/semantic_unet_training_curve.png")
-        checkpoint_path = Path("models/checkpoints/semantic_unet_best.pt")
+    default_run_name = "unet_smoke" if arguments.smoke_test else "semantic_unet"
+    run_name = arguments.run_name or default_run_name
+
+    report_path = Path(f"reports/{run_name}_training.json")
+    figure_path = Path(f"reports/figures/{run_name}_training_curve.png")
+    checkpoint_path = Path(f"models/checkpoints/{run_name}_best.pt")
 
     report_path.parent.mkdir(parents=True, exist_ok=True)
     figure_path.parent.mkdir(parents=True, exist_ok=True)
@@ -314,6 +323,7 @@ def main() -> None:
             "training_loss": training_loss,
             "validation_loss": validation_loss,
             "validation_macro_foreground_dice": validation_dice,
+            "validation_confusion_matrix": validation_metrics["confusion_matrix"],
             "validation_pixel_accuracy": validation_metrics["pixel_accuracy"],
             "validation_dice_per_class": validation_metrics["dice_per_class"],
             "learning_rate": optimizer.param_groups[0]["lr"],
@@ -341,6 +351,7 @@ def main() -> None:
             )
 
         report = {
+            "run_name": run_name,
             "purpose": (
                 "pipeline smoke test"
                 if arguments.smoke_test
@@ -359,6 +370,7 @@ def main() -> None:
             "validation_samples": len(validation_loader.dataset),
             "best_validation_macro_foreground_dice": (best_validation_dice),
             "history": history,
+            "subset_sampling": "seeded random without replacement",
         }
         report_path.write_text(
             json.dumps(report, indent=2),
