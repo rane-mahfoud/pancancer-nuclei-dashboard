@@ -1,5 +1,21 @@
-# Dashboard contract
+# Streamlit dashboard
 
-The Streamlit dashboard is implemented only after the locked evaluation and failure analysis.
+The dashboard presents the committed, locked Fold 3 evaluation without loading
+raw PanNuke data or model checkpoints. It includes the final headline metrics,
+tissue- and class-level comparisons, deterministic qualitative examples, and the
+study protocol and limitations.
 
-It must run on CPU from a small, attributed set of precomputed examples and must display the experiment/config/checkpoint identity. It must not silently run on arbitrary clinical images or describe outputs as diagnostic biomarkers.
+Run it from the repository root:
+
+```bash
+streamlit run app/streamlit_app.py
+```
+
+Required committed inputs:
+
+- `reports/fold3_final_evaluation.json`
+- `reports/fold3_qualitative_examples.json`
+- `reports/figures/fold3_qualitative_examples.png`
+
+The application is a research demonstration. It does not accept arbitrary
+clinical images and does not provide diagnoses or validated biomarkers.
