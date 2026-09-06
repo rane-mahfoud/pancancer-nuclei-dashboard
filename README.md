@@ -84,13 +84,20 @@ Pixels claimed by multiple reference instance masks have ambiguous ownership. Th
 
 ```mermaid
 flowchart TD
-    A[256 × 256 H&E patch] --> B[Shared compact U-Net]
-    B --> C[Semantic head: 6 classes]
-    B --> D[Spatial head: background / interior / boundary]
+    A["`256 × 256
+H&E patch`"] --> B["`Shared compact
+U-Net`"]
+    B --> C["`Semantic head:
+6 classes`"]
+    B --> D["`Spatial head:
+background / interior /
+boundary`"]
     C ~~~ D
-    C --> E[Class-aware hybrid reconstruction]
+    C --> E["`Class-aware hybrid
+reconstruction`"]
     D --> E
-    E --> F[Individual nucleus masks + phenotypes]
+    E --> F["`Individual nucleus masks
++ phenotypes`"]
 ```
 
 ### E1: semantic U-Net plus connected components
