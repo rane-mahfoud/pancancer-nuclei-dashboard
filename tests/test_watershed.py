@@ -32,7 +32,7 @@ def test_empty_semantic_mask_returns_no_instances() -> None:
 def test_boundary_separates_touching_nuclei() -> None:
     """Two interior markers should split one touching semantic region."""
     semantic = np.zeros((20, 20), dtype=np.int64)
-    semantic[4:16, 3:17] = 2
+    semantic[4:16, 3:17] = 3
     probabilities = create_probabilities(20, 20)
 
     probabilities[:, 4:16, 3:17] = 0.05
@@ -49,8 +49,52 @@ def test_boundary_separates_touching_nuclei() -> None:
     )
 
     assert result.number_of_instances == 2
-    assert result.categories.tolist() == [1, 1]
+    assert result.categories.tolist() == [2, 2]
     assert set(np.unique(result.instance_map).tolist()) == {0, 1, 2}
+
+
+def test_inflammatory_regions_use_connected_components() -> None:
+    """Inflammatory regions should not be over-split by spatial seeds."""
+    semantic = np.zeros((20, 20), dtype=np.int64)
+    semantic[4:16, 3:17] = 2
+    probabilities = create_probabilities(20, 20)
+
+    probabilities[:, 4:16, 3:17] = 0.05
+    probabilities[1, 5:15, 4:9] = 0.9
+    probabilities[1, 5:15, 11:16] = 0.9
+    probabilities[2, 4:16, 9:11] = 0.95
+
+    result = boundary_predictions_to_instances(
+        semantic,
+        probabilities,
+        seed_threshold=0.5,
+        minimum_seed_area=5,
+        minimum_instance_area=10,
+    )
+
+    assert result.number_of_instances == 1
+    assert result.categories.tolist() == [1]
+
+
+def test_touching_semantic_classes_keep_separate_identities() -> None:
+    """Watershed basins must not cross predicted class boundaries."""
+    semantic = np.zeros((14, 14), dtype=np.int64)
+    semantic[3:11, 2:7] = 1
+    semantic[3:11, 7:12] = 2
+    probabilities = create_probabilities(14, 14)
+    probabilities[:, 3:11, 2:12] = 0.05
+    probabilities[1, 4:10, 3:11] = 0.9
+
+    result = boundary_predictions_to_instances(
+        semantic,
+        probabilities,
+        seed_threshold=0.5,
+        minimum_seed_area=5,
+        minimum_instance_area=10,
+    )
+
+    assert result.number_of_instances == 2
+    assert result.categories.tolist() == [0, 1]
 
 
 def test_small_instances_are_removed() -> None:

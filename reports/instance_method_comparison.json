@@ -1,0 +1,165 @@
+{
+  "dataset": "RationAI/PanNuke",
+  "revision": "1f498f7bd6a85ef5f204c592b41ac881eab61005",
+  "split": "fold2",
+  "fold3_used": false,
+  "e1_connected_components": {
+    "minimum_area": 100,
+    "binary_pq": 0.3279848021062042,
+    "multiclass_pq": 0.22763552003325924,
+    "matched_nuclei": 22620,
+    "extra_predicted_nuclei": 23909,
+    "missed_nuclei": 37252
+  },
+  "e2_boundary_aware_hybrid": {
+    "method": "Boundary-aware watershed for neoplastic, connective, dead, and epithelial nuclei; connected components for inflammatory nuclei.",
+    "configuration": {
+      "seed_threshold": 0.35,
+      "minimum_seed_area": 20,
+      "minimum_instance_area": 100
+    },
+    "binary_pq": 0.38651424575024956,
+    "multiclass_pq": 0.26741744299242187,
+    "matched_nuclei": 30190,
+    "extra_predicted_nuclei": 23426,
+    "missed_nuclei": 29682
+  },
+  "overall_change": {
+    "binary_pq_absolute": 0.05852944364404539,
+    "binary_pq_relative_percent": 17.845169431080244,
+    "multiclass_pq_absolute": 0.039781922959162636,
+    "multiclass_pq_relative_percent": 17.476149132327944,
+    "additional_matches": 7570,
+    "change_in_extra_predictions": -483,
+    "change_in_missed_nuclei": -7570
+  },
+  "per_class": {
+    "neoplastic": {
+      "connected_components": 0.2189073801416232,
+      "boundary_aware_hybrid": 0.32252029329782944,
+      "absolute_change": 0.10361291315620624,
+      "relative_change_percent": 47.33185015926524
+    },
+    "inflammatory": {
+      "connected_components": 0.2835624380632179,
+      "boundary_aware_hybrid": 0.33042109692759447,
+      "absolute_change": 0.04685865886437657,
+      "relative_change_percent": 16.52498800067794
+    },
+    "connective": {
+      "connected_components": 0.21828585633723901,
+      "boundary_aware_hybrid": 0.22927631519746977,
+      "absolute_change": 0.010990458860230756,
+      "relative_change_percent": 5.0348927982082055
+    },
+    "dead": {
+      "connected_components": 0.054952735217814956,
+      "boundary_aware_hybrid": 0.0403485500348076,
+      "absolute_change": -0.014604185183007358,
+      "relative_change_percent": -26.575902227834646
+    },
+    "epithelial": {
+      "connected_components": 0.099147888848689,
+      "boundary_aware_hybrid": 0.17111943995882703,
+      "absolute_change": 0.07197155111013803,
+      "relative_change_percent": 72.59009944223304
+    }
+  },
+  "per_tissue": {
+    "Adrenal Gland": {
+      "connected_components": 0.2610273934989504,
+      "boundary_aware_hybrid": 0.3002744997015835,
+      "absolute_change": 0.03924710620263311
+    },
+    "Bile Duct": {
+      "connected_components": 0.23718007774877672,
+      "boundary_aware_hybrid": 0.30638236881278236,
+      "absolute_change": 0.06920229106400563
+    },
+    "Bladder": {
+      "connected_components": 0.34287732919351577,
+      "boundary_aware_hybrid": 0.3409723468103954,
+      "absolute_change": -0.0019049823831203683
+    },
+    "Breast": {
+      "connected_components": 0.25409159406900167,
+      "boundary_aware_hybrid": 0.31207122161417894,
+      "absolute_change": 0.05797962754517727
+    },
+    "Cervix": {
+      "connected_components": 0.2971575831312821,
+      "boundary_aware_hybrid": 0.3125376974965698,
+      "absolute_change": 0.01538011436528769
+    },
+    "Colon": {
+      "connected_components": 0.17224574832038306,
+      "boundary_aware_hybrid": 0.23649206108007909,
+      "absolute_change": 0.06424631275969603
+    },
+    "Esophagus": {
+      "connected_components": 0.28217740849734985,
+      "boundary_aware_hybrid": 0.3226190287054449,
+      "absolute_change": 0.04044162020809505
+    },
+    "Head & Neck": {
+      "connected_components": 0.20326308433843407,
+      "boundary_aware_hybrid": 0.22796045377304075,
+      "absolute_change": 0.02469736943460668
+    },
+    "Kidney": {
+      "connected_components": 0.19959525177439144,
+      "boundary_aware_hybrid": 0.19899921398904527,
+      "absolute_change": -0.0005960377853461707
+    },
+    "Liver": {
+      "connected_components": 0.2568415494060579,
+      "boundary_aware_hybrid": 0.2826686376549622,
+      "absolute_change": 0.025827088248904284
+    },
+    "Lung": {
+      "connected_components": 0.18475029641408414,
+      "boundary_aware_hybrid": 0.22326284266038582,
+      "absolute_change": 0.03851254624630168
+    },
+    "Ovarian": {
+      "connected_components": 0.2540602155891589,
+      "boundary_aware_hybrid": 0.3128856353923069,
+      "absolute_change": 0.05882541980314798
+    },
+    "Pancreatic": {
+      "connected_components": 0.2638501571093592,
+      "boundary_aware_hybrid": 0.30490552312881697,
+      "absolute_change": 0.04105536601945775
+    },
+    "Prostate": {
+      "connected_components": 0.21790793129497749,
+      "boundary_aware_hybrid": 0.2813552934926096,
+      "absolute_change": 0.06344736219763214
+    },
+    "Skin": {
+      "connected_components": 0.17002104493216438,
+      "boundary_aware_hybrid": 0.2219724837788462,
+      "absolute_change": 0.051951438846681824
+    },
+    "Stomach": {
+      "connected_components": 0.21882436576947728,
+      "boundary_aware_hybrid": 0.2660249386240109,
+      "absolute_change": 0.04720057285453361
+    },
+    "Testis": {
+      "connected_components": 0.22088303646143626,
+      "boundary_aware_hybrid": 0.25726452752202633,
+      "absolute_change": 0.03638149106059008
+    },
+    "Thyroid": {
+      "connected_components": 0.19004812991358755,
+      "boundary_aware_hybrid": 0.22903308655990537,
+      "absolute_change": 0.03898495664631782
+    },
+    "Uterus": {
+      "connected_components": 0.09827268316953745,
+      "boundary_aware_hybrid": 0.14324955605902456,
+      "absolute_change": 0.04497687288948711
+    }
+  }
+}
