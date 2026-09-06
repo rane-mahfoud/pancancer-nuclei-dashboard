@@ -84,15 +84,14 @@ Pixels claimed by multiple reference instance masks have ambiguous ownership. Th
 
 ```mermaid
 flowchart TD
-    A[H&E image patch] --> B[Compact U-Net]
-    B --> C[Semantic head]
-    B --> D[Spatial head]
-    C --> E[Hybrid reconstruction]
+    A[256 × 256 H&E patch] --> B[Shared compact U-Net]
+    B --> C[Semantic head: 6 classes]
+    B --> D[Spatial head: background / interior / boundary]
+    C ~~~ D
+    C --> E[Class-aware hybrid reconstruction]
     D --> E
-    E --> F[Nucleus instances]
+    E --> F[Individual nucleus masks + phenotypes]
 ```
-
-The semantic head predicts six pixel classes, while the spatial head predicts background, nucleus interior, and nucleus boundary. Hybrid reconstruction combines both outputs to produce individually labelled nucleus masks and their phenotypes.
 
 ### E1: semantic U-Net plus connected components
 
