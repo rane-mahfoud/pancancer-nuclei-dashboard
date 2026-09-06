@@ -1,0 +1,307 @@
+{
+  "dataset": "RationAI/PanNuke",
+  "revision": "1f498f7bd6a85ef5f204c592b41ac881eab61005",
+  "split": "fold3",
+  "number_of_samples": 2722,
+  "protocol": {
+    "purpose": "One-shot final evaluation",
+    "parameters_selected_on": "fold2",
+    "parameters_tuned_on_fold3": false,
+    "fold3_results_used_for_model_selection": false,
+    "overwrite_protection": true
+  },
+  "runtime": {
+    "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "batch_size": 4,
+    "duration_seconds": 211.61399690015242
+  },
+  "methods": {
+    "e1": {
+      "checkpoint": "models\\checkpoints\\semantic_unet_weighted_best.pt",
+      "postprocessing": "Per-class connected components",
+      "minimum_instance_area": 100,
+      "parameter_source": "reports\\instance_threshold_sweep_fold2.json"
+    },
+    "e2": {
+      "checkpoint": "models\\checkpoints\\boundary_unet_weighted_best.pt",
+      "postprocessing": "Boundary-aware watershed for neoplastic, connective, dead, and epithelial nuclei; connected components for inflammatory nuclei",
+      "configuration": {
+        "seed_threshold": 0.35,
+        "minimum_seed_area": 20,
+        "minimum_instance_area": 100
+      },
+      "parameter_source": "reports\\watershed_parameter_sweep_fold2.json"
+    }
+  },
+  "results": {
+    "e1": {
+      "semantic": {
+        "pixel_accuracy": 0.872704713966949,
+        "macro_foreground_dice": 0.5069019670261233,
+        "dice_per_class": {
+          "background": 0.9395439358968108,
+          "neoplastic": 0.6900189742290013,
+          "inflammatory": 0.5832298160707862,
+          "connective": 0.48826628406339984,
+          "dead": 0.1690878630360196,
+          "epithelial": 0.6039068977314094
+        },
+        "confusion_matrix": [
+          [
+            133077828,
+            6985562,
+            1083574,
+            5037398,
+            82171,
+            1901806
+          ],
+          [
+            1229692,
+            12961974,
+            352579,
+            1109363,
+            36961,
+            422842
+          ],
+          [
+            90529,
+            170812,
+            2182991,
+            546447,
+            19665,
+            49926
+          ],
+          [
+            502547,
+            753013,
+            658438,
+            4451106,
+            34559,
+            170874
+          ],
+          [
+            31407,
+            22649,
+            19111,
+            37308,
+            29471,
+            279
+          ],
+          [
+            181414,
+            562485,
+            128806,
+            480130,
+            5536,
+            2976209
+          ]
+        ]
+      },
+      "instance": {
+        "binary_pq": 0.33316086395757927,
+        "multiclass_pq": 0.23260284341965698,
+        "global_detection_quality": 0.41357803793262105,
+        "global_segmentation_quality": 0.7297493745540202,
+        "per_class_pq": {
+          "neoplastic": 0.21795517223181077,
+          "inflammatory": 0.2700021193350523,
+          "connective": 0.21345312182590717,
+          "dead": 0.026081172805030518,
+          "epithelial": 0.10144163197058448
+        },
+        "binary_pq_by_tissue": {
+          "Adrenal Gland": 0.41092099133512183,
+          "Bile Duct": 0.34682730503491127,
+          "Bladder": 0.43811493612971064,
+          "Breast": 0.32786867144010834,
+          "Cervix": 0.3773739465503713,
+          "Colon": 0.2205308734538095,
+          "Esophagus": 0.32900761130050227,
+          "Head & Neck": 0.30490944242343565,
+          "Kidney": 0.3789257403165303,
+          "Liver": 0.4183964381025134,
+          "Lung": 0.34120178538996926,
+          "Ovarian": 0.2837773225364457,
+          "Pancreatic": 0.3336577858995264,
+          "Prostate": 0.2971374927969837,
+          "Skin": 0.25105813338737515,
+          "Stomach": 0.35639868521330126,
+          "Testis": 0.3701445309517875,
+          "Thyroid": 0.2885305696302852,
+          "Uterus": 0.2552741533013171
+        },
+        "multiclass_pq_by_tissue": {
+          "Adrenal Gland": 0.26450605554399753,
+          "Bile Duct": 0.21967879930785003,
+          "Bladder": 0.3633346037972269,
+          "Breast": 0.2512581628140819,
+          "Cervix": 0.26458348886814426,
+          "Colon": 0.16532762414095348,
+          "Esophagus": 0.26079575328555293,
+          "Head & Neck": 0.20760682053515822,
+          "Kidney": 0.2511178968822331,
+          "Liver": 0.2612160269773823,
+          "Lung": 0.21112201279819615,
+          "Ovarian": 0.23358534796432048,
+          "Pancreatic": 0.24972198415806632,
+          "Prostate": 0.2011497760900747,
+          "Skin": 0.13358053550468502,
+          "Stomach": 0.23015063468897315,
+          "Testis": 0.2971760186212524,
+          "Thyroid": 0.16071156352266358,
+          "Uterus": 0.19283091947267006
+        },
+        "matched_nuclei": 24270,
+        "extra_predicted_nuclei": 26442,
+        "missed_nuclei": 42384
+      }
+    },
+    "e2": {
+      "semantic": {
+        "pixel_accuracy": 0.8928368519531938,
+        "macro_foreground_dice": 0.5300187738562928,
+        "dice_per_class": {
+          "background": 0.9517688607327119,
+          "neoplastic": 0.7308781135035334,
+          "inflammatory": 0.6151732614339289,
+          "connective": 0.5307117647661855,
+          "dead": 0.1658994379307714,
+          "epithelial": 0.6074312916470451
+        },
+        "confusion_matrix": [
+          [
+            136132845,
+            5943709,
+            580257,
+            4095661,
+            77365,
+            1338502
+          ],
+          [
+            958284,
+            14006975,
+            160436,
+            763910,
+            26416,
+            197390
+          ],
+          [
+            109652,
+            347175,
+            1897955,
+            620235,
+            15738,
+            69615
+          ],
+          [
+            472649,
+            1080663,
+            299858,
+            4555668,
+            24470,
+            137229
+          ],
+          [
+            33349,
+            28139,
+            18940,
+            32625,
+            26092,
+            1080
+          ],
+          [
+            187708,
+            809096,
+            152657,
+            529508,
+            4246,
+            2651365
+          ]
+        ]
+      },
+      "instance": {
+        "binary_pq": 0.3965732763072303,
+        "multiclass_pq": 0.27639659630210484,
+        "global_detection_quality": 0.5360036039168886,
+        "global_segmentation_quality": 0.7038135417668545,
+        "per_class_pq": {
+          "neoplastic": 0.33781816060045194,
+          "inflammatory": 0.3152882587852184,
+          "connective": 0.22324439866008045,
+          "dead": 0.03146171712629036,
+          "epithelial": 0.17802176805891376
+        },
+        "binary_pq_by_tissue": {
+          "Adrenal Gland": 0.4571464207872518,
+          "Bile Duct": 0.4313449867826182,
+          "Bladder": 0.4445395593762571,
+          "Breast": 0.4112421756853477,
+          "Cervix": 0.43260087601969194,
+          "Colon": 0.30423301153217336,
+          "Esophagus": 0.421110617390638,
+          "Head & Neck": 0.3595921494884367,
+          "Kidney": 0.3691457359417799,
+          "Liver": 0.4670259326694299,
+          "Lung": 0.3827615568240124,
+          "Ovarian": 0.39474253997195585,
+          "Pancreatic": 0.3600715611231731,
+          "Prostate": 0.40391827018878285,
+          "Skin": 0.32987717493964425,
+          "Stomach": 0.39169738420423633,
+          "Testis": 0.40812496546028115,
+          "Thyroid": 0.4046155410712207,
+          "Uterus": 0.36110179038044543
+        },
+        "multiclass_pq_by_tissue": {
+          "Adrenal Gland": 0.29492785284443884,
+          "Bile Duct": 0.28621071218659044,
+          "Bladder": 0.3601513194829263,
+          "Breast": 0.3074552265804384,
+          "Cervix": 0.29936657482538714,
+          "Colon": 0.23381025663723515,
+          "Esophagus": 0.33724273730488663,
+          "Head & Neck": 0.2533227900192185,
+          "Kidney": 0.254929437672383,
+          "Liver": 0.3008647231189837,
+          "Lung": 0.24462093567232832,
+          "Ovarian": 0.3089066849825524,
+          "Pancreatic": 0.2728725034553569,
+          "Prostate": 0.2920683841937813,
+          "Skin": 0.17314173191779933,
+          "Stomach": 0.24830005590347456,
+          "Testis": 0.2986816081044384,
+          "Thyroid": 0.2298294382095118,
+          "Uterus": 0.25483235662826076
+        },
+        "matched_nuclei": 33910,
+        "extra_predicted_nuclei": 25965,
+        "missed_nuclei": 32744
+      }
+    }
+  },
+  "comparison": {
+    "semantic_macro_foreground_dice": {
+      "e1": 0.5069019670261233,
+      "e2": 0.5300187738562928,
+      "absolute_change": 0.02311680683016948,
+      "relative_change_percent": 4.56040977031327
+    },
+    "binary_pq": {
+      "e1": 0.33316086395757927,
+      "e2": 0.3965732763072303,
+      "absolute_change": 0.06341241234965106,
+      "relative_change_percent": 19.033571829650807
+    },
+    "multiclass_pq": {
+      "e1": 0.23260284341965698,
+      "e2": 0.27639659630210484,
+      "absolute_change": 0.043793752882447856,
+      "relative_change_percent": 18.827694553774702
+    },
+    "detection_counts": {
+      "additional_matches": 9640,
+      "change_in_extra_predictions": -477,
+      "change_in_missed_nuclei": -9640
+    }
+  }
+}
