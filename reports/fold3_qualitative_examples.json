@@ -1,0 +1,260 @@
+{
+  "dataset": "RationAI/PanNuke",
+  "revision": "1f498f7bd6a85ef5f204c592b41ac881eab61005",
+  "split": "fold3",
+  "selection_protocol": {
+    "target_tissues_declared_before_inference": [
+      "Breast",
+      "Colon",
+      "Kidney",
+      "Lung",
+      "Skin",
+      "Thyroid"
+    ],
+    "selection_seed": 20260906,
+    "rule": "One seeded-random sample from each predeclared tissue; selection is independent of model performance."
+  },
+  "parameters_source": "reports\\fold3_final_evaluation.json",
+  "examples": [
+    {
+      "fold3_index": 473,
+      "tissue": "Breast",
+      "ground_truth": {
+        "number_of_nuclei": 10,
+        "class_counts": {
+          "neoplastic": 3,
+          "inflammatory": 0,
+          "connective": 7,
+          "dead": 0,
+          "epithelial": 0
+        }
+      },
+      "e1": {
+        "number_of_nuclei": 15,
+        "class_counts": {
+          "neoplastic": 3,
+          "inflammatory": 0,
+          "connective": 11,
+          "dead": 0,
+          "epithelial": 1
+        },
+        "binary_pq": 0.39377583026585394,
+        "detection_quality": 0.56,
+        "segmentation_quality": 0.7031711254747391
+      },
+      "e2": {
+        "number_of_nuclei": 13,
+        "class_counts": {
+          "neoplastic": 1,
+          "inflammatory": 1,
+          "connective": 11,
+          "dead": 0,
+          "epithelial": 0
+        },
+        "binary_pq": 0.43672164608646746,
+        "detection_quality": 0.6086956521739131,
+        "segmentation_quality": 0.7174712757134822
+      }
+    },
+    {
+      "fold3_index": 1942,
+      "tissue": "Colon",
+      "ground_truth": {
+        "number_of_nuclei": 22,
+        "class_counts": {
+          "neoplastic": 4,
+          "inflammatory": 0,
+          "connective": 0,
+          "dead": 18,
+          "epithelial": 0
+        }
+      },
+      "e1": {
+        "number_of_nuclei": 37,
+        "class_counts": {
+          "neoplastic": 3,
+          "inflammatory": 13,
+          "connective": 9,
+          "dead": 0,
+          "epithelial": 12
+        },
+        "binary_pq": 0.1520546188733916,
+        "detection_quality": 0.23728813559322035,
+        "segmentation_quality": 0.6408016081092932
+      },
+      "e2": {
+        "number_of_nuclei": 31,
+        "class_counts": {
+          "neoplastic": 1,
+          "inflammatory": 7,
+          "connective": 14,
+          "dead": 0,
+          "epithelial": 9
+        },
+        "binary_pq": 0.23994436549427128,
+        "detection_quality": 0.37735849056603776,
+        "segmentation_quality": 0.6358525685598189
+      }
+    },
+    {
+      "fold3_index": 2155,
+      "tissue": "Kidney",
+      "ground_truth": {
+        "number_of_nuclei": 29,
+        "class_counts": {
+          "neoplastic": 12,
+          "inflammatory": 7,
+          "connective": 10,
+          "dead": 0,
+          "epithelial": 0
+        }
+      },
+      "e1": {
+        "number_of_nuclei": 30,
+        "class_counts": {
+          "neoplastic": 12,
+          "inflammatory": 7,
+          "connective": 11,
+          "dead": 0,
+          "epithelial": 0
+        },
+        "binary_pq": 0.3753669956630767,
+        "detection_quality": 0.5423728813559322,
+        "segmentation_quality": 0.6920828982537977
+      },
+      "e2": {
+        "number_of_nuclei": 30,
+        "class_counts": {
+          "neoplastic": 21,
+          "inflammatory": 8,
+          "connective": 1,
+          "dead": 0,
+          "epithelial": 0
+        },
+        "binary_pq": 0.4415218420235183,
+        "detection_quality": 0.6440677966101694,
+        "segmentation_quality": 0.6855207547207258
+      }
+    },
+    {
+      "fold3_index": 936,
+      "tissue": "Lung",
+      "ground_truth": {
+        "number_of_nuclei": 68,
+        "class_counts": {
+          "neoplastic": 28,
+          "inflammatory": 0,
+          "connective": 19,
+          "dead": 21,
+          "epithelial": 0
+        }
+      },
+      "e1": {
+        "number_of_nuclei": 44,
+        "class_counts": {
+          "neoplastic": 27,
+          "inflammatory": 2,
+          "connective": 9,
+          "dead": 6,
+          "epithelial": 0
+        },
+        "binary_pq": 0.32151469822623807,
+        "detection_quality": 0.44642857142857145,
+        "segmentation_quality": 0.7201929240267733
+      },
+      "e2": {
+        "number_of_nuclei": 37,
+        "class_counts": {
+          "neoplastic": 12,
+          "inflammatory": 4,
+          "connective": 9,
+          "dead": 12,
+          "epithelial": 0
+        },
+        "binary_pq": 0.35046184444169104,
+        "detection_quality": 0.49523809523809526,
+        "segmentation_quality": 0.70766333973803
+      }
+    },
+    {
+      "fold3_index": 2392,
+      "tissue": "Skin",
+      "ground_truth": {
+        "number_of_nuclei": 113,
+        "class_counts": {
+          "neoplastic": 0,
+          "inflammatory": 97,
+          "connective": 16,
+          "dead": 0,
+          "epithelial": 0
+        }
+      },
+      "e1": {
+        "number_of_nuclei": 32,
+        "class_counts": {
+          "neoplastic": 0,
+          "inflammatory": 32,
+          "connective": 0,
+          "dead": 0,
+          "epithelial": 0
+        },
+        "binary_pq": 0.22992646355725568,
+        "detection_quality": 0.2896551724137931,
+        "segmentation_quality": 0.7937937432333827
+      },
+      "e2": {
+        "number_of_nuclei": 69,
+        "class_counts": {
+          "neoplastic": 0,
+          "inflammatory": 68,
+          "connective": 1,
+          "dead": 0,
+          "epithelial": 0
+        },
+        "binary_pq": 0.49070217175702535,
+        "detection_quality": 0.5934065934065934,
+        "segmentation_quality": 0.8269240301831353
+      }
+    },
+    {
+      "fold3_index": 2505,
+      "tissue": "Thyroid",
+      "ground_truth": {
+        "number_of_nuclei": 33,
+        "class_counts": {
+          "neoplastic": 0,
+          "inflammatory": 3,
+          "connective": 6,
+          "dead": 0,
+          "epithelial": 24
+        }
+      },
+      "e1": {
+        "number_of_nuclei": 29,
+        "class_counts": {
+          "neoplastic": 0,
+          "inflammatory": 4,
+          "connective": 11,
+          "dead": 0,
+          "epithelial": 14
+        },
+        "binary_pq": 0.5425373065754914,
+        "detection_quality": 0.6774193548387096,
+        "segmentation_quality": 0.8008884049447731
+      },
+      "e2": {
+        "number_of_nuclei": 34,
+        "class_counts": {
+          "neoplastic": 13,
+          "inflammatory": 6,
+          "connective": 10,
+          "dead": 0,
+          "epithelial": 5
+        },
+        "binary_pq": 0.47621406437313374,
+        "detection_quality": 0.6567164179104478,
+        "segmentation_quality": 0.7251441434772719
+      }
+    }
+  ]
+}
