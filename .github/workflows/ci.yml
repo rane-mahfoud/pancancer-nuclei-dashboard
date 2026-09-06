@@ -13,12 +13,11 @@ jobs:
         with:
           python-version: "3.11"
           cache: pip
-      - name: Install lightweight CI dependencies
+      - name: Install project and CI dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e .
-          python -m pip install pytest ruff
+          python -m pip install -e ".[dev,data-mirror]"
       - name: Lint
-        run: ruff check src tests scripts
+        run: python -m ruff check src tests scripts
       - name: Test
         run: python -m pytest -q
