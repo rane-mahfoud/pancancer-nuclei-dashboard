@@ -3,6 +3,7 @@
 **A reproducible comparison of semantic and boundary-aware U-Net pipelines for nucleus instance segmentation and phenotyping across heterogeneous H&E tissues**
 
 [![CI](https://github.com/rane-mahfoud/pancancer-nuclei-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/rane-mahfoud/pancancer-nuclei-dashboard/actions/workflows/ci.yml)
+[![Live Dashboard](https://img.shields.io/badge/Live%20Dashboard-Open%20in%20Streamlit-d17f9f?logo=streamlit)](https://pancancer-nuclei-dashboard-jccnachhkf9txw6jd7tfuk.streamlit.app/)
 [![Python](https://img.shields.io/badge/Python-3.10--3.12-6d5f8f)](pyproject.toml)
 [![Tests](https://img.shields.io/badge/tests-73%20passed-d17f9f)](tests)
 [![License](https://img.shields.io/badge/code-MIT-6d5f8f)](LICENSE)
@@ -256,6 +257,12 @@ The corresponding machine-readable selection is stored in [`reports/fold3_qualit
 ## Interactive results dashboard
 
 The Streamlit dashboard reads the committed locked-result reports and qualitative evidence. It does not need the raw PanNuke dataset, model checkpoints, or a GPU, and it does not accept arbitrary patient images.
+
+### [Open the live Pan-Cancer Nuclei Dashboard](https://pancancer-nuclei-dashboard-jccnachhkf9txw6jd7tfuk.streamlit.app/)
+
+The hosted dashboard opens directly in a web browser—no installation or command line is required. If Streamlit has put the community-hosted app to sleep after a period of inactivity, allow it a moment to wake up.
+
+To run the same dashboard locally instead:
 
 ```bash
 python -m streamlit run app/streamlit_app.py
